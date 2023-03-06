@@ -15,7 +15,7 @@ To install cookiecutter:
 
 To get cookiecutter:
 
-`$ python -m cookiecutter https://atkins-global@dev.azure.com/atkins-global/Atkins%20Sweden%20Cloud%20Analytics%20Platform/\_git/DS_package_cookiecutter
+`$ python -m cookiecutter https://github.com/Borg93/ds_cookiecutter
 `
 
 ## Project Structure
