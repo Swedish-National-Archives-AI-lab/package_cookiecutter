@@ -14,7 +14,9 @@ jobs:
           python-version: 3.9
       - uses: actions/cache@v2
         with:
+          {% raw %}
           key: ${{ github.ref }}
+          {% endraw %}
           path: .cache
       - run: make docs_install
       - run: mkdocs gh-deploy --force
