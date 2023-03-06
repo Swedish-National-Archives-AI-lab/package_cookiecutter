@@ -41,8 +41,9 @@ connect_to_repo:
 	git init .
 	git add --all
 	git commit -m "First commit from CookieCutter"
+	git branch -M main
 	git remote add origin $(REPO_URL)
-	git push -f origin main
+	git push -u origin main
 
 # Make release
 release:
