@@ -69,6 +69,12 @@ local_install:
 	@echo Installing python packages...
 	$(PIP) install -e .
 
+test_install:
+	@echo _
+	@echo Installing python packages...
+	pip install -e .
+	pip install -r requirements_dev.txt
+
 # For tests
 local_dev_install:
 	$(PIP) install -r requirements_dev.txt
