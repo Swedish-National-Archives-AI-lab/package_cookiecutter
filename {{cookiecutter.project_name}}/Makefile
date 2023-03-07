@@ -4,8 +4,8 @@ include .env
 
 VENV = venv
 PYTHON = $(VENV)/Scripts/python
-REPO_URL = {{cookiecutter.repo_url}}
-PACKAGE = {{cookiecutter.package_name}}
+REPO_URL = https://github.com/Borg93/riks_ds_utils
+PACKAGE = riks_ds_utils
 PIP = $(VENV)/Scripts/pip
 ACTIVATE_ENV = source venv/Scripts/activate
 #windows :  .\venv\Scripts\activate #./venv/Scripts/activate
@@ -94,9 +94,9 @@ test_tox:
 local_build: build local_clean
 	
 build:
-	@echo "Building package ${PACKAGE}"
-	$(PIP) install build
-	${PYTHON} -m build
+	@echo "Building package"
+	pip install build
+	python -m build
 
 # Clean local dev
 clean_venv: local_clean
@@ -118,12 +118,12 @@ local_clean:
 
 
 docker_build:
-	docker build -t {{cookiecutter.package_name}} .
-	docker run {{cookiecutter.package_name}}
+	docker build -t riks_ds_utils .
+	docker run riks_ds_utils
 	@echo dont forget to remove image or rebuild it..
 
 docs_install:
-	$(PIP) install build mkdocs == 1.4.2
-	$(PIP) install build mkdocs-material == 8.5.11
-	$(PIP) install build mkdocs-jupyter == 0.22.0
+	pip install build mkdocs == 1.4.2
+	pip install build mkdocs-material == 8.5.11
+	pip install build mkdocs-jupyter == 0.22.0
 
