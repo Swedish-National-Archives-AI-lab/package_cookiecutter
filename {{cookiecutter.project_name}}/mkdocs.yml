@@ -102,4 +102,4 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Readme: README.md
+  - Readme: index.md

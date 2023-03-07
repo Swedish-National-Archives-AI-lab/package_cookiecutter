@@ -20,7 +20,7 @@ with open(test_packages_path) as test_packages_path_file:
 DISTNAME = "{{cookiecutter.package_name}}"
 DESCRIPTION = "short description of project."
 
-with open("docs/README.md", "r", encoding="utf-8") as f:
+with open("./README.md", "r", encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 MAINTAINER = "{{cookiecutter.maintainer}}"

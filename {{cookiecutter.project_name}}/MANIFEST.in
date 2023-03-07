@@ -1,2 +1,2 @@
 include src/{{cookiecutter.package_name}}/assets/*.txt
-include docs/*
+include ./README.md
