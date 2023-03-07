@@ -1,7 +1,9 @@
 name: auto docs
 on:
   push:
-    tags: -'docs v*.*'
+    tags: 
+      - 'docs v*'
+
 permissions:
   contents: write
 jobs:
