@@ -4,8 +4,8 @@ include .env
 
 VENV = venv
 PYTHON = $(VENV)/Scripts/python
-REPO_URL = https://github.com/Borg93/riks_ds_utils
-PACKAGE = riks_ds_utils
+REPO_URL = {{cookiecutter.repo_url}}
+PACKAGE = {{cookiecutter.package_name}}
 PIP = $(VENV)/Scripts/pip
 ACTIVATE_ENV = source venv/Scripts/activate
 #windows :  .\venv\Scripts\activate #./venv/Scripts/activate
@@ -30,7 +30,7 @@ help:
 	@echo make build             - Build python package
 	@echo _
 	@echo make clean_venv        - Removes Local venv 
-	@echo make local_clean       - Removes Local folders such as .pytest_cache and other cache files..  
+	@echo make local_clean       - local_clean_windows/linux.. Removes Local folders such as .pytest_cache and other cache files..  
 	@echo make local_build       - Combines make build and local_clean
 	@echo _
 	@echo make docker_build		 - docker build locally and run container
@@ -111,25 +111,33 @@ clean_venv: local_clean
 	rm -rf $(VENV)
 
 .PHONY: local_clean
-local_clean:
+local_clean_windows:
 	@echo "Cleaning local folders:"
 	if exist "dist" rmdir /S dist
 	if exist ".pytest_cache" rmdir /S .pytest_cache
 	if exist ".mypy_cache" rmdir /S .mypy_cache
 	if exist ".tox" rmdir /S .tox
-	if exist "src\package_name.egg-info" rmdir /S src\package_name.egg-info
+	if exist "src\${PACKAGE}.egg-info" rmdir /S src\${PACKAGE}.egg-info
 	if exist "src\${PACKAGE}\__pycache__" rmdir /S src\${PACKAGE}\__pycache__
 	if exist "tests\unit\__pycache__" rmdir /S tests\unit\__pycache__
 	if exist ".coverage" del .coverage
 
+local_clean_linux:
+	rm -r dist
+	rm -r .pytest_cache
+	rm -r .mypy_cache
+	rm -r .tox
+	rm -r src/${PACKAGE}.egg-info
+	rm -r src/${PACKAGE}/__pycache__
+	rm -r tests/unit/__pycache__
+	rm .coverage
 
 docker_build:
-	docker build -t riks_ds_utils .
-	docker run riks_ds_utils
+	docker build -t ${PACKAGE} .
+	docker run ${PACKAGE}
 	@echo dont forget to remove image or rebuild it..
 
 docs_install:
 	pip install build mkdocs == 1.4.2
 	pip install build mkdocs-material == 8.5.11
 	pip install build mkdocs-jupyter == 0.22.0
-
