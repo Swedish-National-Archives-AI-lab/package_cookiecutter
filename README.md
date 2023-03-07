@@ -6,7 +6,7 @@ A logical, reasonably standardized, but flexible project structure for doing and
 
 Requirements to use the cookiecutter template:
 
-- Python 3.8+
+- Python 3.7+
 - Cookiecutter Python package >= 1.4.0: This can be installed with pip or conda.
 
 To install cookiecutter:

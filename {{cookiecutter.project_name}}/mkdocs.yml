@@ -1,11 +1,11 @@
 # Project information
-site_name: { { cookiecutter.project_name } }
+site_name: "{{cookiecutter.project_name}}"
 site_url: https://Borg93.github.io/{{cookiecutter.package_name}}
-site_author: { { cookiecutter.maintainer } }
+site_author: "{{cookiecutter.maintainer}}"
 site_description: >-
   Work in progress ...
 repo_name: Borg93/{{cookiecutter.package_name}}
-repo_url: { { cookiecutter.repo_url } }
+repo_url: https://Borg93.github.io/{{cookiecutter.package_name}}
 
 # Copyright
 copyright: Copyright &copy; 2023 Riksarkivet
@@ -38,25 +38,26 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/fav-removebg-preview.png
-  icon:
-    logo: logo
-  logo: assets/fav-removebg-preview.png
+  # favicon: assets/fav-removebg-preview.png
+  # icon:
+  #   logo: logo
+  # logo: assets/fav-removebg-preview.png
 
 plugins:
   - tags
   - search
+  - mkdocstrings
   - mkdocs-jupyter:
       include_source: True
 
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/Riksarkivet
+      link: https://github.com/{{cookiecutter.maintainer}}
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/Riksarkivet
+      link: https://twitter.com/{{cookiecutter.maintainer}}
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/Riksarkivet/
+      link: https://www.linkedin.com/in/{{cookiecutter.maintainer}}
   generator: false
 
 markdown_extensions:
@@ -103,3 +104,4 @@ markdown_extensions:
 # Page tree
 nav:
   - Readme: index.md
+  - Refrence API: api.md

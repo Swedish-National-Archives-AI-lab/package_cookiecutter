@@ -45,7 +45,7 @@ def setup_package():
             "Operating System :: MacOS :: MacOS X",
             "Operating System :: Microsoft :: Windows"
         ],
-        python_requires=">=3.9",
+        python_requires=">={{cookiecutter.python_interpreter}}",
         install_requires=base_packages,
         include_package_data=True,
         package_dir={"": "src"},

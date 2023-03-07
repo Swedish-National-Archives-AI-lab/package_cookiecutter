@@ -1,5 +1,7 @@
 # {{cookiecutter.package_name}}
 
+package description
+
 ## Package versioning
 
 Package version
