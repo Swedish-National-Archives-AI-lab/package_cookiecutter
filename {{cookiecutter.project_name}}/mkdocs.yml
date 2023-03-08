@@ -5,7 +5,7 @@ site_author: "{{cookiecutter.maintainer}}"
 site_description: >-
   Work in progress ...
 repo_name: Borg93/{{cookiecutter.package_name}}
-repo_url: https://Borg93.github.io/{{cookiecutter.package_name}}
+repo_url: https://Borg93/{{cookiecutter.package_name}}
 
 # Copyright
 copyright: Copyright &copy; 2023 Riksarkivet
