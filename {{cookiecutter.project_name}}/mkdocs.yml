@@ -50,12 +50,12 @@ plugins:
       default_handler: python
       handlers:
         python:
-          rendering:
-            show_root_toc_entry: False
-            show_root_heading: False
-            show_source: True
-            show_category_heading: True
-            show_bases: False
+#           rendering:
+#             show_root_toc_entry: False
+#             show_root_heading: False
+#             show_source: True
+#             show_category_heading: True
+#             show_bases: False
           selection:
             filters:
               - "!^_"  # exclude all members starting with _
@@ -118,3 +118,4 @@ markdown_extensions:
 nav:
   - Readme: index.md
   - Refrence API: api.md
+  - Changelog: changelog.md
