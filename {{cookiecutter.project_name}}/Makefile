@@ -143,3 +143,9 @@ docs_install:
 	pip install 'mkdocs-jupyter ~=0.22.0'
 	pip install 'mkdocstrings>=0.20.0'
 	pip install 'mkdocstrings-python >= 0.8'
+
+new_env_conda:
+	conda env remove --name {{cookiecutter.project_name}}
+	conda create -n {{cookiecutter.project_name}} python={{cookiecutter.python_interpreter}}
+	conda activate {{cookiecutter.project_name}}
+	pip install -r requirements.txt
