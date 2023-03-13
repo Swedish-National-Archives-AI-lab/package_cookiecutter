@@ -22,7 +22,7 @@ no_implicit_reexport = true
 
 [tool.black]
 line-length = 119
-target-version = ['py39'] 
+target-version = ['{{cookiecutter.python_interpreter}}'] 
 
 [tool.ruff]
 
