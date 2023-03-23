@@ -4,7 +4,7 @@ include .env
 
 VENV = venv
 PYTHON = $(VENV)/Scripts/python
-REPO_URL = https://Borg93/{{cookiecutter.repo_name}}
+REPO_URL = https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}
 PACKAGE = {{cookiecutter.package_name}}
 PIP = $(VENV)/Scripts/pip
 ACTIVATE_ENV = source venv/Scripts/activate

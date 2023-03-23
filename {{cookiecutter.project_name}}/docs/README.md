@@ -9,10 +9,10 @@ hide:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-![Test Python 🐍 package ](https://github.com/Borg93/{{cookiecutter.repo_name}}/actions/workflows/tests.yml/badge.svg)
-[![Publish Python 🐍 distributions 📦 to PyPI](https://github.com/Borg93/{{cookiecutter.repo_name}}/actions/workflows/release.yml/badge.svg)](https://github.com/Borg93/{{cookiecutter.repo_name}}/actions/workflows/release.yml)
-[![Automatic generating docs for 📦](https://github.com/Borg93/{{cookiecutter.repo_name}}/actions/workflows/docs.yml/badge.svg)](https://github.com/Borg93/{{cookiecutter.repo_name}}/actions/workflows/docs.yml)
-[![PyPI - License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/Borg93/{{cookiecutter.repo_name}}/blob/master/LICENSE)
+![Test Python 🐍 package ](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/actions/workflows/tests.yml/badge.svg)
+[![Publish Python 🐍 distributions 📦 to PyPI](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/actions/workflows/release.yml/badge.svg)](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/actions/workflows/release.yml)
+[![Automatic generating docs for 📦](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/actions/workflows/docs.yml/badge.svg)](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/actions/workflows/docs.yml)
+[![PyPI - License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}/blob/master/LICENSE)
 [![PyPI - Python](https://img.shields.io/badge/python-3.7%20|%203.8%20|%203.9-blue.svg)](https://pypi.org/project/{{cookiecutter.repo_name}}/)
 
 ## **Installation**

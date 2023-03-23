@@ -49,7 +49,7 @@ with open("docs/README.md", "r", encoding="utf-8") as f:
 
 MAINTAINER = "{{cookiecutter.maintainer}}"
 LICENSE = "{{cookiecutter.LICENSE}}"
-PROJECT_URL = "https://Borg93/{{cookiecutter.repo_name}}"
+PROJECT_URL = "https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}"
 
 def setup_package():
     setup(
