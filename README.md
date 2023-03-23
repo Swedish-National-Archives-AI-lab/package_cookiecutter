@@ -55,9 +55,8 @@ To get cookiecutter:
     │                           generated with `pip freeze > requirements.txt`
     ├── requirements_dev.txt <- The dev requirements file for building and testing
     │
-    ├── setup.py             <- makes project pip installable (pip install -e .) so src can be imported
-    ├── pyproject.toml       <- toml file to control configs of other packages (such as flake8.ini)
-    ├── setup.cfg            <- Metadata for build
+    ├── setup.py             <- makes project pip installable (pip install -e .) so src can be imported + metadata for build
+    ├── pyproject.toml       <- toml file to control configs of other packages (such as flake8.ini) 
     │
     ├── src                  <- Source code for use in this project.
     │   └── package_name
