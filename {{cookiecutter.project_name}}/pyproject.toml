@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
@@ -25,23 +25,6 @@ line-length = 119
 target-version = ['{{cookiecutter.python_interpreter}}'] 
 
 [tool.ruff]
-
-# https://www.flake8rules.com/
-# Things to ignore:
-#   E203: conflicts with black
-#   E501: conflicts with black
-#   W601: has_key() deprecated (false positives)
-#   E402: module level import not at top of file
-#   B006: use of mutable defaults in function signatures
-#   B007: Loop control variable not used within the loop body.
-#   B011: Don't use assert False
-#   B023: Function definition does not bind loop variable
-#   E741: Ambiguous variable name
-#   W503: Line break occurred before a binary operator 
-#   W605: Invalid escape sequence 'x' --> best practice: regex = r'\.png$'
-#   E711: Comparison to None should be 'if cond is not None:'
-#   E712: Comparison to False should be 'if cond is not False:'
-
 ignore = ["C901", "E501", "E741", "W605"]
 select = ["C", "E", "F", "I", "W"]
 line-length = 119
@@ -54,14 +37,69 @@ line-length = 119
 lines-after-imports = 2
 known-first-party = ["{{cookiecutter.package_name}}"]
 
-# for .vscode setting.json
-# {
-#     "python.formatting.provider": "black",
-#     "python.formatting.blackArgs": ["--line-length", "150"],
-#     "python.linting.enabled": true,
-#     "python.linting.flake8Enabled": true,
-#     "python.linting.flake8Args": [
-#         "--max-line-length=150",
-#         "--ignore=E203,E501,W601,E402,B006,B007,B011,B023,E741,W503,E711,E712",
-#     ],
-# }
+
+# [project]
+# name = "diachronic"
+# description = "The purpose of the project is to provide a historical text model that covers different time periods from Old Swedish"
+# readme = "README.md"
+# requires-python = ">= {{cookiecutter.python_interpreter}}"
+# version="0.0.0.dev0"
+# authors = [{ name = "The Swedish National Archives Face team "}]
+# license = { text = "MIT" }
+
+# dependencies = [
+#    "pandas",
+#    "numpy"
+# ]
+
+# keywords = [
+#     # add keywords..
+#     "deep learning",
+#     "pytorch",
+# ]
+
+# classifiers = [
+#     "Intended Audience :: Developers",
+#     "Intended Audience :: Education",
+#     "Intended Audience :: Science/Research",
+#     "License :: OSI Approved :: MIT",
+#     "Operating System :: OS Independent",
+#     "Programming Language :: Python :: {{cookiecutter.python_interpreter}}",
+#     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+# ]
+
+# [project.optional-dependencies]
+# dev = [
+#     "pre-commit",
+#     "pytest == 7.2.1",
+#     "pytest-cov == 4.0.0",
+#     "mypy",
+#     "black",
+#     "ruff",
+#     "python-dotenv==0.5.1",
+# ]
+
+
+# ## Package versioning
+
+# Package version
+# PEP0440 compatible formatted version, see:
+# https://www.python.org/dev/peps/pep-0440/
+
+# Generic release markers:
+# X.Y.0 # For first release after an increment in Y
+# X.Y.Z # For bugfix releases
+
+# Admissible pre-release markers:
+# X.Y.ZaN # Alpha release
+# X.Y.ZbN # Beta release
+# X.Y.ZrcN # Release Candidate
+# X.Y.Z # Final release
+
+# Dev branch marker is: 'X.Y.dev' or 'X.Y.devN' where N is an integer.
+# 'X.Y.dev0' is the canonical version of 'X.Y.dev'
+
+# For instance:
+# X increments -> Incompatible w/ previous versions and has foundational changes
+# Y incremnts -> Adding functionality, but still backwards compatible
+# Z increments -> Backwards compatible and focuses on bug fixes (i.e Defects that are in production)
