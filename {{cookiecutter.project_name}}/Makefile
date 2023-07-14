@@ -116,13 +116,6 @@ docs_install:
 	pip install 'mkdocstrings>=0.20.0'
 	pip install 'mkdocstrings-python >= 0.8'
 
-## new_env_conda - Create and setup new conda environment
-new_env_conda:
-	conda env remove --name {{cookiecutter.project_name}}
-	conda create -n {{cookiecutter.project_name}} python={{cookiecutter.python_interpreter}}
-	conda activate {{cookiecutter.project_name}}
-	pip install -r requirements.txt
-
 ## new_env_conda - Create and setup new conda environment from environment.yml file
 new_env_conda:
 	@if conda env list | grep -q {{cookiecutter.project_name}}; then \
