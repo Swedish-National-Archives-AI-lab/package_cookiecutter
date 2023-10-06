@@ -4,7 +4,7 @@ version = "0.0.1.dev0"
 description = "short description of project."
 readme = "docs/README.md"
 requires-python = ">={{cookiecutter.python_interpreter}}"
-authors = [ { "{{cookiecutter.maintainer}}"  }]
+authors = [ { name = "{{cookiecutter.maintainer}}"  }]
 license = "{{cookiecutter.LICENSE}}"
 classifiers = [
     "Intended Audience :: Science/Research",
