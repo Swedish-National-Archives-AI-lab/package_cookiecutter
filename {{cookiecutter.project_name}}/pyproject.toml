@@ -1,3 +1,53 @@
+[project]
+name = "{{cookiecutter.package_name}}"
+version = "0.0.1.dev0"
+description = "short description of project."
+readme = "docs/README.md"
+authors = ["{{cookiecutter.maintainer}}"]
+license = "{{cookiecutter.LICENSE}}"
+homepage = "https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}"
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Operating System :: Unix",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows"
+]
+python = ">{{cookiecutter.python_interpreter}}"
+
+[tool.versioning-info]
+description = """
+Package version
+PEP0440 compatible formatted version, see:
+https://www.python.org/dev/peps/pep-0440/
+
+Generic release markers:
+X.Y.0 # For first release after an increment in Y
+X.Y.Z # For bugfix releases
+
+Admissible pre-release markers:
+X.Y.ZaN # Alpha release
+X.Y.ZbN # Beta release
+X.Y.ZrcN # Release Candidate
+X.Y.Z # Final release
+
+Dev branch marker is: 'X.Y.dev' or 'X.Y.devN' where N is an integer.
+'X.Y.dev0' is the canonical version of 'X.Y.dev'
+
+For instance:
+X increments -> Incompatible w/ previous versions and has foundational changes
+Y incremnts -> Adding functionality, but still backwards compatible
+Z increments -> Backwards compatible and focuses on bug fixes (i.e Defects that are in production)
+"""
+
+[dependencies]
+# Move dependencies from requirements.txt here
+
+[dev-dependencies]
+# Move dev dependencies from requirements_dev.txt here
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
@@ -29,77 +79,9 @@ ignore = ["C901", "E501", "E741", "W605"]
 select = ["C", "E", "F", "I", "W"]
 line-length = 119
 
-# Ignore import violations in all `__init__.py` files.
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["E402", "F401", "F403", "F811"]
 
 [tool.ruff.isort]
 lines-after-imports = 2
 known-first-party = ["{{cookiecutter.package_name}}"]
-
-
-# [project]
-# name = "diachronic"
-# description = "The purpose of the project is to provide a historical text model that covers different time periods from Old Swedish"
-# readme = "README.md"
-# requires-python = ">= {{cookiecutter.python_interpreter}}"
-# version="0.0.0.dev0"
-# authors = [{ name = "The Swedish National Archives Face team "}]
-# license = { text = "MIT" }
-
-# dependencies = [
-#    "pandas",
-#    "numpy"
-# ]
-
-# keywords = [
-#     # add keywords..
-#     "deep learning",
-#     "pytorch",
-# ]
-
-# classifiers = [
-#     "Intended Audience :: Developers",
-#     "Intended Audience :: Education",
-#     "Intended Audience :: Science/Research",
-#     "License :: OSI Approved :: MIT",
-#     "Operating System :: OS Independent",
-#     "Programming Language :: Python :: {{cookiecutter.python_interpreter}}",
-#     "Topic :: Scientific/Engineering :: Artificial Intelligence",
-# ]
-
-# [project.optional-dependencies]
-# dev = [
-#     "pre-commit",
-#     "pytest == 7.2.1",
-#     "pytest-cov == 4.0.0",
-#     "mypy",
-#     "black",
-#     "ruff",
-#     "python-dotenv==0.5.1",
-# ]
-
-
-# ## Package versioning
-
-# Package version
-# PEP0440 compatible formatted version, see:
-# https://www.python.org/dev/peps/pep-0440/
-
-# Generic release markers:
-# X.Y.0 # For first release after an increment in Y
-# X.Y.Z # For bugfix releases
-
-# Admissible pre-release markers:
-# X.Y.ZaN # Alpha release
-# X.Y.ZbN # Beta release
-# X.Y.ZrcN # Release Candidate
-# X.Y.Z # Final release
-
-# Dev branch marker is: 'X.Y.dev' or 'X.Y.devN' where N is an integer.
-# 'X.Y.dev0' is the canonical version of 'X.Y.dev'
-
-# For instance:
-# X increments -> Incompatible w/ previous versions and has foundational changes
-# Y incremnts -> Adding functionality, but still backwards compatible
-# Z increments -> Backwards compatible and focuses on bug fixes (i.e Defects that are in production)
