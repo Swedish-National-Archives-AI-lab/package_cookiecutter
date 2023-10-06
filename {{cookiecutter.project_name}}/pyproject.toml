@@ -3,9 +3,9 @@ name = "{{cookiecutter.package_name}}"
 version = "0.0.1.dev0"
 description = "short description of project."
 readme = "docs/README.md"
-authors = ["{{cookiecutter.maintainer}}"]
+requires-python = ">={{cookiecutter.python_interpreter}}"
+authors = [ { "{{cookiecutter.maintainer}}"  }]
 license = "{{cookiecutter.LICENSE}}"
-homepage = "https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}"
 classifiers = [
     "Intended Audience :: Science/Research",
     "Development Status :: 1 - Planning",
@@ -15,7 +15,17 @@ classifiers = [
     "Operating System :: MacOS :: MacOS X",
     "Operating System :: Microsoft :: Windows"
 ]
-python = ">{{cookiecutter.python_interpreter}}"
+
+dependencies = ["numpy"]
+
+[project.urls]
+homepage = "https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}"
+documentation = "https://readthedocs.org"
+repository = "https://github.com"
+changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+
+[project.optional-dependencies]
+test = ["pytest < 6.0.0", "pytest-cov[all]", "ruff", "black", "mypy", "coverage", "isort", "python-dotenv"]
 
 [tool.versioning-info]
 description = """
@@ -41,12 +51,6 @@ X increments -> Incompatible w/ previous versions and has foundational changes
 Y incremnts -> Adding functionality, but still backwards compatible
 Z increments -> Backwards compatible and focuses on bug fixes (i.e Defects that are in production)
 """
-
-[dependencies]
-# Move dependencies from requirements.txt here
-
-[dev-dependencies]
-# Move dev dependencies from requirements_dev.txt here
 
 [build-system]
 requires = ["setuptools"]
