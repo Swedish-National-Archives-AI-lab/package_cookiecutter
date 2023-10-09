@@ -5,7 +5,7 @@ description = "short description of project."
 readme = "docs/README.md"
 requires-python = ">={{cookiecutter.python_interpreter}}"
 authors = [ { name = "{{cookiecutter.maintainer}}"  }]
-license = "{{cookiecutter.LICENSE}}"
+license = { text = "{{cookiecutter.LICENSE}}" }
 classifiers = [
     "Intended Audience :: Science/Research",
     "Development Status :: 1 - Planning",
