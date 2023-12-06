@@ -71,27 +71,3 @@ To get cookiecutter:
 ## Trunk at Scale
 
 This cookiecutter supports the development style Trunk-Based Development (TBD) to enable DS-package which can be reused between projects.
-
-## Package versioning
-
-Package version
-PEP0440 compatible formatted version, see:
-https://www.python.org/dev/peps/pep-0440/
-
-Generic release markers:
-X.Y.0 # For first release after an increment in Y
-X.Y.Z # For bugfix releases
-
-Admissible pre-release markers:
-X.Y.ZaN # Alpha release
-X.Y.ZbN # Beta release
-X.Y.ZrcN # Release Candidate
-X.Y.Z # Final release
-
-Dev branch marker is: 'X.Y.dev' or 'X.Y.devN' where N is an integer.
-'X.Y.dev0' is the canonical version of 'X.Y.dev'
-
-For instance:
-X increments -> Incompatible w/ previous versions and has foundational changes
-Y incremnts -> Adding functionality, but still backwards compatible
-Z increments -> Backwards compatible and focuses on bug fixes (i.e Defects that are in production)
