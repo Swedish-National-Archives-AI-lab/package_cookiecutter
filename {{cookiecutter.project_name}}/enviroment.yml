@@ -1,7 +1,0 @@
-name: {{ cookiecutter.repo_name }}
-channels:
-  - defaults
-dependencies:
-  - python={{cookiecutter.python_interpreter}}
-  - pip
-    - -r file:requirements.txt
