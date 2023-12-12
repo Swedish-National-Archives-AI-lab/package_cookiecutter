@@ -1,7 +1,7 @@
 {
   "maintainer": "Riksarkivet",
   "project_name": "htrflow",
-  "project_slug": "{{ cookiecutter.projet_name.lower().replace(' ', '_') }}",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
   "LICENSE": "MIT",
   "repo_owner": "Riksarkivet",
   "repo_name": "htrflow",
