@@ -1,5 +1,6 @@
 {
   "maintainer": "Riksarkivet",
+  "author": "Riksarkivet",
   "project_name": "htrflow",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
   "LICENSE": "MIT",
