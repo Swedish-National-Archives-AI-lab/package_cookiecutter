@@ -1,3 +1,3 @@
-## API:
+# API documentation
 
-::: src.riks_ds_utils.main
+:::{{ cookiecutter.package_name }}

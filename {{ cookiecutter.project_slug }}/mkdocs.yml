@@ -116,6 +116,6 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Getting started: README.md
+  - Getting started: index.md
   - Refrence API: api.md
   - Changelog: changelog.md
