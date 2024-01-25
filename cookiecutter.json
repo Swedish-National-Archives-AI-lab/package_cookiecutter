@@ -6,6 +6,6 @@
   "LICENSE": "MIT",
   "repo_owner": "Riksarkivet",
   "repo_name": "htrflow",
-  "package_name": "htrflow",
+  "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
   "python_interpreter": ["3.10", "3.9", "3.8", "3.7"]
 }
