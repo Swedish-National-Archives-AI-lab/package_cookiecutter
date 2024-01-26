@@ -6,16 +6,16 @@ repos:
       - id: trailing-whitespace 
       - id: name-tests-test 
 
-- repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.1.14
-  hooks:
-    - id: ruff
-      args: [ --fix ]
-    - id: ruff-format
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.14
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
 
-  # - repo: local
-  #   hooks:
-  #     - id: unit-tests
-  #       name: Running unit tests.
-  #       language: system
-  #       entry: make tests-unit
+    # - repo: local
+    #   hooks:
+    #     - id: unit-tests
+    #       name: Running unit tests.
+    #       language: system
+    #       entry: make tests-unit
