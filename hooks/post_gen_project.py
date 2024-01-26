@@ -62,6 +62,9 @@ def print_futher_instuctions(project_name: str, github: str) -> None:
         $ git branch -M main
         $ git remote add origin https://github.com/{github}/{project_name}.git
         $ git push -u origin main
+
+    or just run:
+        make connect_to_repo
     """
     print(textwrap.dedent(message))
 
@@ -94,7 +97,7 @@ def main() -> None:
 
     run_poetry_pre_commit()
 
-    print("Project successfully initialized")
+    print("################ Project successfully initialized ################")
 
     print_futher_instuctions(project_name=PROJECT_NAME, github=GITHUB_USER)
 

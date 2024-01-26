@@ -1,39 +1,80 @@
-[project]
-name = "{{cookiecutter.package_name}}"
-version = "0.0.1.dev0"
-description = "short description of project."
-readme = "docs/README.md"
-requires-python = ">={{cookiecutter.python_interpreter}}"
-authors = [ { name = "{{cookiecutter.maintainer}}"  }]
-license = { text = "{{cookiecutter.LICENSE}}" }
+[tool.poetry]
+name = "{{ cookiecutter.project_slug }}"
+version = "0.0.1"
+description = "{{ cookiecutter.project_short_description }}"
+authors = [
+    "{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>",
+]
+license = "{{cookiecutter.LICENSE}}" 
+readme = "README.md"
+
+documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
+homepage = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
+repository = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}"
+
 classifiers = [
-    "Intended Audience :: Science/Research",
-    "Development Status :: 1 - Planning",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Operating System :: Unix",
-    "Operating System :: MacOS :: MacOS X",
-    "Operating System :: Microsoft :: Windows"
+  "Development Status :: 4 - Beta", 
+  "Intended Audience :: Developers/Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: {{ cookiecutter.python_interpreter }}",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
 ]
 
-dependencies = ["numpy"]
+packages = [
+    { include = "{{ cookiecutter.package_name }}", from = "src" }
+]
 
-[project.urls]
-homepage = "https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}"
-documentation = "https://readthedocs.org"
-repository = "https://github.com"
-changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+[tool.poetry.dependencies]
+python = ">={{ cookiecutter.python_interpreter }}, <4.0"
+pandas =  "*"
 
-[project.optional-dependencies]
-test = ["pytest < 6.0.0", "pytest-cov[all]", "ruff", "black", "mypy", "coverage", "isort", "python-dotenv"]
+[tool.poetry.group.test.dependencies]
+black = "*"
+importlib-metadata = "==4.11.*"
+python-dotenv = "*"
+mypy = "*"
+pre-commit = "*"
+pytest = "*"
+pytest-github-actions-annotate-failures = "*"
+pytest-cov = "*"
+coverage = "*"
+ruff = "*"
+isort = "*"
+
+{%- if cookiecutter.include_docs_folder == "y" -%}
+
+{%- else -%}
+[tool.poetry.group.docs.dependencies]
+mkdocs = "*"
+mkdocstrings = {version = ">=0.20", extras = ["python"]}
+mkdocs-material = "*"
+pymdown-extensions = "*"
+mkdocs-jupyter = "*"
+{% endif %}
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 
 [tool.pytest.ini_options]
-addopts = "-v --cov={{cookiecutter.package_name}}"
+addopts = """\
+    --cov {{cookiecutter.package_name}} \
+    --cov tests \
+    --cov-report term-missing \
+    --no-cov-on-fail \
+"""
 testpaths = ["tests/unit"]
+
+
+[tool.coverage.report]
+fail_under = 90
+exclude_lines = [
+    'if TYPE_CHECKING:',
+    'pragma: no cover'
+]
 
 [tool.mypy]
 mypy_path = "src"

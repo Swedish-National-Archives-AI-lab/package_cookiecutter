@@ -19,7 +19,7 @@ help:
 connect_to_repo:
 	git init .
 	git add --all
-	git commit -m "First commit from CookieCutter"
+	git commit -m "First commit.."
 	git branch -M main
 	git remote add origin $(REPO_URL)
 	git push -u origin main
@@ -36,50 +36,6 @@ pre_commit:
 	pre-commit --version
 	pre-commit install
 	pre-commit run
-
-## venv - Creates a venv, however, needs to be activated before use 
-venv:
-	python -m venv $(VENV)
-	$(ACTIVATE_ENV)
-
-## local_install - Installs python packages
-local_install:
-	$(PIP) install -e .
-
-## test_install - Installs python packages for testing
-test_install:
-	pip install -e .
-	pip install -r requirements_dev.txt
-
-## local_dev_install - Install dev packages to test code
-local_dev_install:
-	$(PIP) install -r requirements_dev.txt
-
-## tests-unit - Runs unit tests
-tests-unit: local_dev_install
-	pytest tests/unit -v
-
-## mock-tests-unit - Mock unit tests
-mock-tests-unit:
-	pytest tests/unit -v
-
-## tests-integration - Run integration tests
-tests-integration:
-	pytest test/integration
-
-## build - Build python package
-build:
-	@echo "Building package"
-	pip install build
-	python -m build
-
-## local_build - Build python package and remove cache files
-local_build: build local_clean
-	
-## clean_venv - Removes Local venv and cache files
-clean_venv: local_clean
-	deactivate
-	rm -rf $(VENV)
 
 ## local_clean_windows - Clean local folders for windows
 local_clean_windows:
@@ -108,18 +64,4 @@ docker_build:
 	docker build -t ${PACKAGE} .
 	docker run ${PACKAGE}
 
-## docs_install - Install requirements for mkdocs
-docs_install:
-	pip install 'mkdocs ==1.4.2'
-	pip install 'mkdocs-material >=8.0.0'
-	pip install 'mkdocs-jupyter ~=0.22.0'
-	pip install 'mkdocstrings>=0.20.0'
-	pip install 'mkdocstrings-python >= 0.8'
-
-## new_env_conda - Create and setup new conda environment from environment.yml file
-new_env_conda:
-	@if conda env list | grep -q {{cookiecutter.project_name}}; then \
-		conda env remove --name {{cookiecutter.project_name}}; \
-	fi
-	conda env create -f environment.yml
 
