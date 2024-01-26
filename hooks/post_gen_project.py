@@ -4,12 +4,12 @@ from pathlib import Path
 
 # Project root directory
 PROJECT_SLUG = "{{ cookiecutter.project_slug }}"
-GITHUB_USER = "{{ cookiecutter.github_name }}"
+GITHUB_USER = "{{ cookiecutter.github_username }}"
 
 PROJECT_DIRECTORY = Path.cwd().absolute()
 
 
-def remove_folder(folder_path: str) -> None:
+def remove_folder(folder_path: Path) -> None:
     for child in folder_path.iterdir(): 
         if child.is_file():
             child.unlink() 
@@ -17,7 +17,7 @@ def remove_folder(folder_path: str) -> None:
             remove_folder(child)  
     folder_path.rmdir()  
 
-def remove_file(file_path: str) -> None:
+def remove_file(file_path: Path) -> None:
     if file_path.exists():
         file_path.unlink()
 
@@ -36,7 +36,7 @@ def recursive_removal() -> None:
     }
 
     for condition, paths in removal_conditions.items():
-        if f'{{ cookiecutter.{condition}}}' != 'y':
+        if 'cookiecutter.' + condition != 'y':
             for path in paths:
                 if path.is_dir():
                     remove_folder(path)
