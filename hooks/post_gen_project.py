@@ -3,8 +3,7 @@ import textwrap
 from pathlib import Path
 
 # Project root directory
-PROJECT_NAME = "{{ cookiecutter.project_name }}"
-PROJECT_MODULE = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
+PROJECT_SLUG = "{{ cookiecutter.project_slug }}"
 GITHUB_USER = "{{ cookiecutter.github_name }}"
 
 PROJECT_DIRECTORY = Path.cwd().absolute()
@@ -26,7 +25,7 @@ def recursive_removal() -> None:
     removal_conditions = {
         'include_data_folder': [PROJECT_DIRECTORY / 'data'],
         'include_model_folder': [PROJECT_DIRECTORY / 'model'],
-        'include_docker': [PROJECT_DIRECTORY / 'Dockerfile.'],
+        'include_docker': [PROJECT_DIRECTORY / 'Dockerfile'],
         'include_notebook_folder': [PROJECT_DIRECTORY / 'notebooks'],
         'include_docs_folder': [
             PROJECT_DIRECTORY / 'docs',
@@ -37,7 +36,7 @@ def recursive_removal() -> None:
     }
 
     for condition, paths in removal_conditions.items():
-        if '{{ cookiecutter.' + condition + ' }}' != 'y':
+        if f'{{ cookiecutter.{condition}}}' != 'y':
             for path in paths:
                 if path.is_dir():
                     remove_folder(path)
@@ -45,22 +44,22 @@ def recursive_removal() -> None:
                     remove_file(path)
 
 
-def print_futher_instuctions(project_name: str, github: str) -> None:
+def print_futher_instuctions(project_slug: str, github: str) -> None:
     """Show user what to do next after project creation.
 
     Args:
-        project_name: current project name
+        project_slug: current project name
         github: GitHub username
     """
     message = f"""
-    Your project {project_name} is created.
+    Your project {project_slug} is created.
     
     Upload initial code to GitHub:
 
         $ git add .
         $ git commit -m ":tada: Initial commit"
         $ git branch -M main
-        $ git remote add origin https://github.com/{github}/{project_name}.git
+        $ git remote add origin https://github.com/{github}/{project_slug}.git
         $ git push -u origin main
 
     or just run:
@@ -99,7 +98,7 @@ def main() -> None:
 
     print("################ Project successfully initialized ################")
 
-    print_futher_instuctions(project_name=PROJECT_NAME, github=GITHUB_USER)
+    print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
 
 if __name__ == "__main__":
