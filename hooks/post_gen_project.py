@@ -10,7 +10,6 @@ GITHUB_USER = "{{ cookiecutter.github_name }}"
 PROJECT_DIRECTORY = Path.cwd().absolute()
 
 
-
 def remove_folder(folder_path: str) -> None:
     for child in folder_path.iterdir(): 
         if child.is_file():
@@ -24,22 +23,27 @@ def remove_file(file_path: str) -> None:
         file_path.unlink()
 
 def recursive_removal() -> None:
-    removal_map = {
-        'include_data_folder': PROJECT_DIRECTORY / 'data',
-        'include_model_folder': PROJECT_DIRECTORY / 'model',
-        'include_notebook_folder': PROJECT_DIRECTORY / 'notebooks',
-        'include_docs_folder': PROJECT_DIRECTORY / 'notebooks',
-        'include_docs_folder': PROJECT_DIRECTORY / 'mkdocs.yml',
-        'include_docs_folder': PROJECT_DIRECTORY / 'CHANGELOG.MD',
-        'include_docs_folder': PROJECT_DIRECTORY / '.github' / 'workflows' /'mkdocs.yml'
+    removal_conditions = {
+        'include_data_folder': [PROJECT_DIRECTORY / 'data'],
+        'include_model_folder': [PROJECT_DIRECTORY / 'model'],
+        'include_docker': [PROJECT_DIRECTORY / 'Dockerfile.'],
+        'include_notebook_folder': [PROJECT_DIRECTORY / 'notebooks'],
+        'include_docs_folder': [
+            PROJECT_DIRECTORY / 'docs',
+            PROJECT_DIRECTORY / 'mkdocs.yml',
+            PROJECT_DIRECTORY / 'CHANGELOG.MD',
+            PROJECT_DIRECTORY / '.github' / 'workflows' / 'mkdocs.yml'
+        ],
     }
 
-    for key, path in removal_map.items():
-        if '{{ cookiecutter.' + key + ' }}' != 'y':
-            if path.is_dir():
-                remove_folder(path)
-            elif path.is_file():
-                remove_file(path)
+    for condition, paths in removal_conditions.items():
+        if '{{ cookiecutter.' + condition + ' }}' != 'y':
+            for path in paths:
+                if path.is_dir():
+                    remove_folder(path)
+                elif path.is_file():
+                    remove_file(path)
+
 
 def print_futher_instuctions(project_name: str, github: str) -> None:
     """Show user what to do next after project creation.
@@ -61,20 +65,23 @@ def print_futher_instuctions(project_name: str, github: str) -> None:
     """
     print(textwrap.dedent(message))
 
+def run_command(command: list[str], description: str) -> None:
+    print(f"Running '{' '.join(command)}'")
+    subprocess.run(command, check=True)
+
 def run_poetry_pre_commit() -> None:
 
-    print("Running 'pip install --upgrade pip pre-commit poetry'")
-    subprocess.run(['pip', 'install', '--upgrade', 'pip', 'pre-commit', 'poetry'], check=True)
+    # (shell command , msg )
+    commands = [
+        (['pip', 'install', '--upgrade', 'pip', 'pre-commit', 'poetry'], "upgrading pip, installing pre-commit and poetry"),
+        (['pre-commit', 'install'], "installing pre-commit hooks"),
+        (['poetry', 'config', '--local', 'virtualenvs.in-project', 'true'], "configuring poetry for local virtual environments"),
+        (['poetry', 'install'], "installing project dependencies with poetry"),
+        (['poetry', 'shell'], "activating local virtual environment with poetry shell")
+    ]
 
-    print("Running 'pre-commit install'")
-
-    subprocess.run(['pre-commit', 'install'], check=True)
-
-    print("Running 'poetry config --local virtualenvs.in-project true'")
-    subprocess.run(['poetry', 'config', '--local', 'virtualenvs.in-project', 'true'], check=True)
-
-    print("Running 'poetry install'")
-    subprocess.run(['poetry', 'install'], check=True)
+    for command, description in commands:
+        run_command(command, description)
 
 
 def main() -> None:
