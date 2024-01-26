@@ -3,9 +3,13 @@
   "author": "Riksarkivet",
   "project_name": "htrflow",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-  "LICENSE": "MIT",
+  "license": ["MIT", "EUPL-1.2"],
   "repo_owner": "Riksarkivet",
   "repo_name": "htrflow",
   "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
-  "python_interpreter": ["3.10", "3.9", "3.8", "3.7"]
+  "python_interpreter": "3.10",
+  "include_data_folder": "y",
+  "include_model_folder": "y",
+  "include_notebook_folder": "y",
+  "include_docs_folder": "y"
 }

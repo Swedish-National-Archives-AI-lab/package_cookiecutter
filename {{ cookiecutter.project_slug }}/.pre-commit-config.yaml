@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: check-yaml # checks yaml files for parseable syntax.
       - id: trailing-whitespace # trims trailing whitespace.
-    # -   id: name-tests-test # verifies that test files are named correctly.
+      - id: name-tests-test # verifies that test files are named correctly.
 
   - repo: https://github.com/psf/black
     rev: stable

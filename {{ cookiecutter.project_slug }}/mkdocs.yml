@@ -8,7 +8,7 @@ repo_name: {{cookiecutter.repo_owner}}/{{cookiecutter.package_name}}
 repo_url: https://{{cookiecutter.repo_owner}}/{{cookiecutter.package_name}}
 
 # Copyright
-copyright: Copyright &copy; 2023 Riksarkivet
+copyright: Copyright &copy; 2023 {{cookiecutter.repo_owner}}
 
 # Configuration
 theme:
@@ -59,6 +59,8 @@ plugins:
           selection:
             filters:
               - "!^_" # exclude all members starting with _
+      watch:
+        - src/{{ cookiecutter.package_name }}
 
   # - mkdocs-jupyter:
   #     include_source: True
