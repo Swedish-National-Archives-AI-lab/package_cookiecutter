@@ -2,7 +2,7 @@
 name = "cookiecutter-DS"
 version = "1.0.0"
 description = "A cookiecutter template for creating a DS python package"
-authors = ["Borg93"]
+authors = ["Riksarkivet"]
 license = "MIT"
 
 [tool.poetry.dependencies]
@@ -15,3 +15,6 @@ cruft = "*"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

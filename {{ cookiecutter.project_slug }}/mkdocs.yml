@@ -1,14 +1,14 @@
 # Project information
 site_name: "{{cookiecutter.project_name}}"
-site_url: https://{{cookiecutter.repo_owner}}.github.io/{{cookiecutter.package_name}}
-site_author: "{{cookiecutter.maintainer}}"
+site_url: https://{{cookiecutter.github_username}}.github.io/{{ cookiecutter.project_slug }}
+site_author: "{{cookiecutter.author_name}}"
 site_description: >-
   Work in progress ...
-repo_name: {{cookiecutter.repo_owner}}/{{cookiecutter.package_name}}
-repo_url: https://{{cookiecutter.repo_owner}}/{{cookiecutter.package_name}}
+repo_name: {{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
+repo_url: https://{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
 
 # Copyright
-copyright: Copyright &copy; 2023 {{cookiecutter.repo_owner}}
+copyright: Copyright &copy; 2023 {{cookiecutter.github_username}}
 
 # Configuration
 theme:
@@ -68,11 +68,11 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.com/{{cookiecutter.maintainer}}
+      link: https://github.com/{{cookiecutter.author_name}}
     - icon: fontawesome/brands/twitter
-      link: https://twitter.com/{{cookiecutter.maintainer}}
+      link: https://twitter.com/{{cookiecutter.author_name}}
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/{{cookiecutter.maintainer}}
+      link: https://www.linkedin.com/in/{{cookiecutter.author_name}}
   generator: false
 
 markdown_extensions:

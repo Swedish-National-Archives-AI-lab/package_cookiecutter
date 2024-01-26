@@ -2,14 +2,10 @@ include .env
 
 VENV = venv
 PYTHON = $(VENV)/Scripts/python
-REPO_URL = https://{{cookiecutter.repo_owner}}/{{cookiecutter.repo_name}}
+REPO_URL = https://{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
 PACKAGE = {{cookiecutter.package_name}}
 PIP = $(VENV)/Scripts/pip
 ACTIVATE_ENV = . venv/bin/activate
-
-.PHONY: help connect_to_repo release pre_commit venv local_install test_install local_dev_install tests-unit \
-        mock-tests-unit tests-integration build local_build clean_venv local_clean_windows local_clean_linux \
-        docker_build docs_install new_env_conda
 
 ## help - Display this help screen
 help:

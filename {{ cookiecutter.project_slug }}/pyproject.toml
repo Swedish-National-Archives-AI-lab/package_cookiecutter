@@ -5,7 +5,7 @@ description = "{{ cookiecutter.project_short_description }}"
 authors = [
     "{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>",
 ]
-license = "{{cookiecutter.LICENSE}}" 
+license = "{{cookiecutter.license}}" 
 readme = "README.md"
 
 documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
