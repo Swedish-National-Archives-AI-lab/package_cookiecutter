@@ -52,10 +52,13 @@ def print_futher_instuctions(project_slug: str, github: str) -> None:
         github: GitHub username
     """
     message = f"""
-    Your project {project_slug} is created.
-    
-    Upload initial code to GitHub:
+    ################ Project successfully initialized ################
 
+    Your project {project_slug} was created.
+    
+    1. Upload initial code to GitHub:
+
+        $ git init
         $ git add .
         $ git commit -m ":tada: Initial commit"
         $ git branch -M main
@@ -64,6 +67,19 @@ def print_futher_instuctions(project_slug: str, github: str) -> None:
 
     or just run:
         make connect_to_repo
+
+    2. 
+
+    To activate venv run:
+        $ poetry shell 
+    
+    This will activate the local virtual environment with poetry shell.
+
+    ############################################################
+
+    Happy Coding :)
+
+    
     """
     print(textwrap.dedent(message))
 
@@ -71,15 +87,14 @@ def run_command(command: list[str], description: str) -> None:
     print(f"Running '{' '.join(command)}'")
     subprocess.run(command, check=True)
 
-def run_poetry_pre_commit() -> None:
+def running_pre_installation() -> None:
 
     # (shell command , msg )
     commands = [
-        (['pip', 'install', '--upgrade', 'pip', 'pre-commit', 'poetry'], "upgrading pip, installing pre-commit and poetry"),
-        (['pre-commit', 'install'], "installing pre-commit hooks"),
+        (['pip', 'install', '--upgrade', 'pip', 'poetry'], "upgrading pip, installing poetry"),
+        # (['pre-commit', 'install'], "installing pre-commit hooks"),
         (['poetry', 'config', '--local', 'virtualenvs.in-project', 'true'], "configuring poetry for local virtual environments"),
         (['poetry', 'install'], "installing project dependencies with poetry"),
-        (['poetry', 'shell'], "activating local virtual environment with poetry shell")
     ]
 
     for command, description in commands:
@@ -91,12 +106,8 @@ def main() -> None:
     print("First removing unwanted folders and files..")
     recursive_removal()
 
-    print("Running 'git init'")
-    subprocess.run(['git', 'init'], check=True)
-
-    run_poetry_pre_commit()
-
-    print("################ Project successfully initialized ################")
+    print("Installing stuff..")
+    running_pre_installation()
 
     print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
