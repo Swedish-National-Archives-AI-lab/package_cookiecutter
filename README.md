@@ -1,5 +1,7 @@
 # DS cookiecutter
 
+!fix this. https://python-poetry.org/docs/managing-environments/
+
 A logical, reasonably standardized, but flexible project structure for doing and sharing data science that is package and maintable as software
 
 ## To get started
