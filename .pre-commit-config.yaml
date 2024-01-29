@@ -2,11 +2,13 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0 #
     hooks:
-      - id: check-yaml 
-      - id: trailing-whitespace 
-      - id: name-tests-test
+      - id: check-yaml
+        exclude: ^{{ cookiecutter.project_slug }}/
+      - id: trailing-whitespace
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.14
     hooks:
       - id: ruff
+        exclude: ^{{ cookiecutter.project_slug }}/
+

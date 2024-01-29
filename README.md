@@ -1,33 +1,160 @@
 # DS cookiecutter
 
-!fix this. https://python-poetry.org/docs/managing-environments/
-
 A logical, reasonably standardized, but flexible project structure for doing and sharing data science that is package and maintable as software
 
 ## To get started
 
 Requirements to use the cookiecutter template:
 
-- Python 3.10+
-- Cookiecutter 
-- Cruft
+- pyenv
+- cookiecutter
+- cruft
 
-To install packages:
+## Usage
+
+### local-requirements
+
+#### Installing pyenv
+
+**Step 0.**
+Open a terminal in the home directory.
+
+```bash
+# Ctrl + Alt + T
+ cd ~
+```
+
+**Step 1.**
+To install pyenv on Debian or Ubuntu-based Linux distributions, you have to install several libraries and packages necessary for building Python from scratch. Enter the following command into your terminal to install all necessary packages:
+
+```bash
+sudo apt install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
+git
+```
+
+**Step 2.**
+To install pyenv you can clone it directly from the GitHub repository:
+
+```bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
+```
+
+**Step 3.**
+After cloning it you need to enter the following commands to add pyenv to your $PATH and start it when a new terminal is opened (if you use a different shell than bash you have to change ~/.bashrc accordingly):
+
+```bash
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+```
+
+#### Using pyenv
+
+**Step 4.**
+After you successfully installed pyenv it is time to look at the different commands that pyenv offers to manage different Python versions.
+
+```bash
+pyenv install [PYTHON_VERSION]
+```
+
+and to check the version that are installed on your system:
+
+```bash
+pyenv versions
+```
+
+Now to select a default Python version that is active when you open a new terminal, you use the global command:
+
+**Step 5.**
+
+```bash
+pyenv global [PYTHON_VERSION]
+```
+
+### Python-requirements
+
+To install python packages:
 
 `$ pip install cookiecutter cruft `
 
+### Creating the boilerplate
 
-To get cookiecutter:
+Set the right python version you want to work with:
+
+```bash
+pyenv global [PYTHON_VERSION]
+```
+
+Afterwards to get our cookiecutter boilerplate:
 
 `$ python -m cookiecutter https://github.com/Borg93/ds_cookiecutter
 `
 
-To use with cruft:
+To have automatically updates and sync cookiecutter boilerplate use cruft:
 
 `$ python -m cruft create https://github.com/Borg93/ds_cookiecutter
 `
 
-> Note: The cookiecutter template can get the updates, so you need to run:
+> Note that poetry is installed and that it creates a venv for the project.
 
-`$ python -m cruft update 
+To get the updates from the boilerplate into your project use:
+
+`$ python -m cruft update
 `
+
+# For development
+
+To install Poetry, Cookiecutter, and Cruft on Ubuntu, you can follow these steps. This process involves using the terminal and executing a series of commands.
+
+**Step 1:** Install Poetry
+Install Poetry on Ubuntu by running the following command in your terminal:
+
+```bash
+pip install poetry
+```
+
+**Step 2:** Configure Poetry
+Set Virtual Environment Configuration:
+
+```bash
+poetry config--local virtualenvs.in-project true
+```
+
+**Step 3:** Install Dependencies
+
+```bash
+poetry install
+```
+
+When you run poetry install, Poetry will install dependencies based on the **poetry.lock** file, ensuring you get the same versions that were used when the lock file was last updated.
+
+- If you need to update the dependencies to their latest versions and update the poetry.lock file accordingly, you can run poetry update instead. This will fetch the latest versions of the dependencies within the constraints specified in pyproject.toml and update the poetry.lock file.
+
+**Step 4:** Activate the Virtual Environment
+This activates the virtual environment for your project.
+
+```bash
+poetry shell
+```
+
+**Step 5:** Install new Dependencies
+
+```bash
+poetry add <pipy_package>
+```
+
+if dev dep e.g:
+
+```bash
+poetry add pre-commit --dev
+```
+
+**Step 6:** Exit the Virtual Environment:
+
+```bash
+exit
+```
+
+### pre-commit

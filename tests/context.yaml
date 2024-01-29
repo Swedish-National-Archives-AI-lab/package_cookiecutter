@@ -5,3 +5,4 @@ default_context:
     project_name: "example_project"
     project_short_description: "A short description of the project"
     license: "MIT"
+    python_interpreter: "3.10"

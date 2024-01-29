@@ -10,7 +10,10 @@ python = "^3.10"
 cookiecutter = "*"
 cruft = "*"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pre-commit = "^3.6.0"
+ruff = "*"
 
 [build-system]
 requires = ["poetry-core"]

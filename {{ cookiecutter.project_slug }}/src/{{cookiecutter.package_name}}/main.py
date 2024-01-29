@@ -18,4 +18,3 @@ def aggregate_mean(df :DataFrame, column:str) -> dict:
 
 if __name__ == "__main__":
     print("hello world")
-    

@@ -10,12 +10,12 @@ PROJECT_DIRECTORY = Path.cwd().absolute()
 
 
 def remove_folder(folder_path: Path) -> None:
-    for child in folder_path.iterdir(): 
+    for child in folder_path.iterdir():
         if child.is_file():
-            child.unlink() 
+            child.unlink()
         else:
-            remove_folder(child)  
-    folder_path.rmdir()  
+            remove_folder(child)
+    folder_path.rmdir()
 
 def remove_file(file_path: Path) -> None:
     if file_path.exists():
@@ -55,7 +55,7 @@ def print_futher_instuctions(project_slug: str, github: str) -> None:
     ################ Project successfully initialized ################
 
     Your project {project_slug} was created.
-    
+
     1. Upload initial code to GitHub:
 
         $ git init
@@ -68,18 +68,18 @@ def print_futher_instuctions(project_slug: str, github: str) -> None:
     or just run:
         make connect_to_repo
 
-    2. 
+    2.
 
     To activate venv run:
-        $ poetry shell 
-    
+        $ poetry shell
+
     This will activate the local virtual environment with poetry shell.
 
     ############################################################
 
     Happy Coding :)
 
-    
+
     """
     print(textwrap.dedent(message))
 
