@@ -4,6 +4,11 @@
 
 A logical, reasonably standardized, but flexible project structure for doing and sharing data science that is package and maintable as software
 
+TLDR;
+
+`$ python -m cruft create https://github.com/Swedish-National-Archives-AI-lab/package_cookiecutter
+`
+
 ## To get started
 
 Requirements to use the cookiecutter template:
@@ -91,12 +96,12 @@ pyenv global [PYTHON_VERSION]
 
 Afterwards to get our cookiecutter boilerplate:
 
-`$ python -m cookiecutter https://github.com/Borg93/ds_cookiecutter
+`$ python -m cookiecutter https://github.com/Swedish-National-Archives-AI-lab/package_cookiecutter
 `
 
 To have automatically updates and sync cookiecutter boilerplate use cruft:
 
-`$ python -m cruft create https://github.com/Borg93/ds_cookiecutter
+`$ python -m cruft create https://github.com/Swedish-National-Archives-AI-lab/package_cookiecutter
 `
 
 > Note that poetry is installed and that it creates a venv for the project.
