@@ -172,3 +172,24 @@ pre-commit install
 ```bash
 pre-commit run --all-files
 ```
+
+## Ruff
+
+You can configure Ruff to format, fix, and organize imports on-save via the following settings.json:
+
+`ctrl+shift+p`
+
+Install the vscode extension + edit this in setting.json:
+
+```json
+{
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.organizeImports": true
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  }
+}
+```

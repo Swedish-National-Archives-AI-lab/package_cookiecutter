@@ -2,6 +2,7 @@ import subprocess
 import textwrap
 from pathlib import Path
 
+
 # Project root directory
 PROJECT_SLUG = "{{ cookiecutter.project_slug }}"
 GITHUB_USER = "{{ cookiecutter.github_username }}"
@@ -17,26 +18,28 @@ def remove_folder(folder_path: Path) -> None:
             remove_folder(child)
     folder_path.rmdir()
 
+
 def remove_file(file_path: Path) -> None:
     if file_path.exists():
         file_path.unlink()
 
+
 def recursive_removal() -> None:
     removal_conditions = {
-        'include_data_folder': [PROJECT_DIRECTORY / 'data'],
-        'include_model_folder': [PROJECT_DIRECTORY / 'model'],
-        'include_docker': [PROJECT_DIRECTORY / 'Dockerfile'],
-        'include_notebook_folder': [PROJECT_DIRECTORY / 'notebooks'],
-        'include_docs_folder': [
-            PROJECT_DIRECTORY / 'docs',
-            PROJECT_DIRECTORY / 'mkdocs.yml',
-            PROJECT_DIRECTORY / 'CHANGELOG.MD',
-            PROJECT_DIRECTORY / '.github' / 'workflows' / 'mkdocs.yml'
+        "include_data_folder": [PROJECT_DIRECTORY / "data"],
+        "include_model_folder": [PROJECT_DIRECTORY / "model"],
+        "include_docker": [PROJECT_DIRECTORY / "Dockerfile"],
+        "include_notebook_folder": [PROJECT_DIRECTORY / "notebooks"],
+        "include_docs_folder": [
+            PROJECT_DIRECTORY / "docs",
+            PROJECT_DIRECTORY / "mkdocs.yml",
+            PROJECT_DIRECTORY / "CHANGELOG.MD",
+            PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
         ],
     }
 
     for condition, paths in removal_conditions.items():
-        if 'cookiecutter.' + condition != 'y':
+        if "cookiecutter." + condition != "y":
             for path in paths:
                 if path.is_dir():
                     remove_folder(path)
@@ -83,18 +86,22 @@ def print_futher_instuctions(project_slug: str, github: str) -> None:
     """
     print(textwrap.dedent(message))
 
+
 def run_command(command: list[str], description: str) -> None:
     print(f"Running '{' '.join(command)}'")
     subprocess.run(command, check=True)
 
-def running_pre_installation() -> None:
 
+def running_pre_installation() -> None:
     # (shell command , msg )
     commands = [
-        (['pip', 'install', '--upgrade', 'pip', 'poetry'], "upgrading pip, installing poetry"),
+        (["pip", "install", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
         # (['pre-commit', 'install'], "installing pre-commit hooks"),
-        (['poetry', 'config', '--local', 'virtualenvs.in-project', 'true'], "configuring poetry for local virtual environments"),
-        (['poetry', 'install'], "installing project dependencies with poetry"),
+        (
+            ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
+            "configuring poetry for local virtual environments",
+        ),
+        (["poetry", "install"], "installing project dependencies with poetry"),
     ]
 
     for command, description in commands:
@@ -102,7 +109,6 @@ def running_pre_installation() -> None:
 
 
 def main() -> None:
-
     print("First removing unwanted folders and files..")
     recursive_removal()
 
