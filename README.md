@@ -1,5 +1,7 @@
 # DS cookiecutter
 
+[![Sanity checks](https://github.com/Swedish-National-Archives-AI-lab/package_cookiecutter/actions/workflows/test.yml/badge.svg)](https://github.com/Swedish-National-Archives-AI-lab/package_cookiecutter/actions/workflows/test.yml)
+
 A logical, reasonably standardized, but flexible project structure for doing and sharing data science that is package and maintable as software
 
 ## To get started
@@ -106,6 +108,8 @@ To get the updates from the boilerplate into your project use:
 
 # For development
 
+## Enviroment
+
 To install Poetry, Cookiecutter, and Cruft on Ubuntu, you can follow these steps. This process involves using the terminal and executing a series of commands.
 
 **Step 1:** Install Poetry
@@ -157,4 +161,14 @@ poetry add pre-commit --dev
 exit
 ```
 
-### pre-commit
+## Pre-commit
+
+Pre-commit hooks like ruff and other quality checks to make sure the changeset is in good shape before a commit/push happens.
+
+```bash
+pre-commit install
+```
+
+```bash
+pre-commit run --all-files
+```
