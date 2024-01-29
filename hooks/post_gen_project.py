@@ -33,7 +33,7 @@ def recursive_removal() -> None:
         "include_docs_folder": [
             PROJECT_DIRECTORY / "docs",
             PROJECT_DIRECTORY / "mkdocs.yml",
-            PROJECT_DIRECTORY / "CHANGELOG.MD",
+            PROJECT_DIRECTORY / "CHANGELOG.md",
             PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
         ],
     }
