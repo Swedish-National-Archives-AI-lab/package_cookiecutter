@@ -1,5 +1,6 @@
-import pandas as pd
 from typing import TypeVar
+
+import pandas as pd
 
 DataFrame = TypeVar('pandas.core.frame.DataFrame')
 

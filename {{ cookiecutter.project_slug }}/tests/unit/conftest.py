@@ -1,6 +1,7 @@
 # put fixtures here
-import pytest
 import pandas as pd
+import pytest
+
 
 @pytest.fixture(scope="module")
 def data():
