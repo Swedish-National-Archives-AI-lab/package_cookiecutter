@@ -10,7 +10,7 @@
   "python_interpreter": "3.10",
   "include_data_folder": "y",
   "include_model_folder": "y",
-  "include_docker": "y",
   "include_notebook_folder": "y",
+  "include_docker": "y",
   "include_docs_folder": "y"
 }
