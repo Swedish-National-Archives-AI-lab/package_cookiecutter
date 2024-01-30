@@ -154,10 +154,10 @@ poetry shell
 poetry add <pipy_package>
 ```
 
-if dev dep e.g:
+To install the **pre-commit** package in a group called dev, run the following command:
 
 ```bash
-poetry add pre-commit --dev
+poetry add pre-commit --group dev
 ```
 
 **Step 6:** Exit the Virtual Environment:
