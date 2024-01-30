@@ -12,6 +12,7 @@ PROJECT_DIRECTORY = Path.cwd().absolute()
 
 def remove_folder(folder_path: Path) -> None:
     for child in folder_path.iterdir():
+        print(child)
         if child.is_file():
             child.unlink()
         else:
@@ -21,6 +22,7 @@ def remove_folder(folder_path: Path) -> None:
 
 def remove_file(file_path: Path) -> None:
     if file_path.exists():
+        print(file_path)
         file_path.unlink()
 
 
@@ -43,11 +45,9 @@ def recursive_removal() -> None:
             for path in paths:
                 print("cookiecutter." + condition, path)
                 if path.is_dir():
-                    print("folder")
-                    # remove_folder(path)
+                    remove_folder(path)
                 elif path.is_file():
-                    print("file")
-                    # remove_file(path)
+                    remove_file(path)
 
 
 def print_futher_instuctions(project_slug: str, github: str) -> None:
