@@ -57,7 +57,7 @@ def recursive_removal() -> None:
             remove_folder(data_folder)
 
     if "{{ cookiecutter.include_model_folder }}" != "y":
-        model_folder = PROJECT_DIRECTORY / "model"
+        model_folder = PROJECT_DIRECTORY / "models"
         if model_folder.exists():
             remove_folder(model_folder)
 
