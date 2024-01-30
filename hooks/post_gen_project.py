@@ -28,11 +28,11 @@ def remove_file(file_path: Path) -> None:
 
 def recursive_removal() -> None:
     removal_conditions = {
-        "include_data_folder": [PROJECT_DIRECTORY / "data"],
-        "include_model_folder": [PROJECT_DIRECTORY / "model"],
-        "include_notebook_folder": [PROJECT_DIRECTORY / "notebooks"],
-        "include_docker": [PROJECT_DIRECTORY / "Dockerfile"],
-        "include_docs_folder": [
+        "{{ cookiecutter.include_data_folder }}": [PROJECT_DIRECTORY / "data"],
+        "{{ cookiecutter.include_model_folder }}": [PROJECT_DIRECTORY / "model"],
+        "{{ cookiecutter.include_notebook_folder }}": [PROJECT_DIRECTORY / "notebooks"],
+        "{{ cookiecutter.include_docker }}": [PROJECT_DIRECTORY / "Dockerfile"],
+        "{{ cookiecutter.include_docs_folder }}": [
             PROJECT_DIRECTORY / "docs",
             PROJECT_DIRECTORY / "mkdocs.yml",
             PROJECT_DIRECTORY / "CHANGELOG.md",
@@ -41,9 +41,9 @@ def recursive_removal() -> None:
     }
 
     for condition, paths in removal_conditions.items():
-        if "cookiecutter." + condition != "y":
+        if condition != "y":
             for path in paths:
-                print("cookiecutter." + condition, path)
+                print(f"Removing: {path}")
                 if path.is_dir():
                     remove_folder(path)
                 elif path.is_file():
