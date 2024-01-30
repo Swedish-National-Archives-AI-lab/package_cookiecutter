@@ -43,7 +43,7 @@ def recursive_removal() -> None:
             for path in paths:
                 print("cookiecutter." + condition, path)
                 if path.is_dir():
-                    print("file")
+                    print("folder")
                     # remove_folder(path)
                 elif path.is_file():
                     print("file")
