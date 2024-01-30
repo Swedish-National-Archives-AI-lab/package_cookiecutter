@@ -26,33 +26,31 @@ def remove_file(file_path: Path) -> None:
         file_path.unlink()
 
 
-def check_and_remove_path(path: Path) -> None:
-    """Check if a path exists and remove it if it does."""
-    if path.exists():
-        if path.is_dir():
-            remove_folder(path)
-        elif path.is_file():
-            remove_file(path)
-
-
 def recursive_removal() -> None:
-    removal_map = {
-        "{{ cookiecutter.include_data_folder }}": [PROJECT_DIRECTORY / "data"],
-        "{{ cookiecutter.include_model_folder }}": [PROJECT_DIRECTORY / "models"],
-        "{{ cookiecutter.include_notebook_folder }}": [PROJECT_DIRECTORY / "notebooks"],
-        "{{ cookiecutter.include_docker }}": [PROJECT_DIRECTORY / "Dockerfile"],
-        "{{ cookiecutter.include_docs_folder }}": [
-            PROJECT_DIRECTORY / "docs",
-            PROJECT_DIRECTORY / "mkdocs.yml",
-            PROJECT_DIRECTORY / "CHANGELOG.md",
-            PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
-        ],
-    }
+    conditions_and_paths = [
+        ("{{ cookiecutter.include_data_folder }}", [PROJECT_DIRECTORY / "data"]),
+        ("{{ cookiecutter.include_model_folder }}", [PROJECT_DIRECTORY / "models"]),
+        ("{{ cookiecutter.include_notebook_folder }}", [PROJECT_DIRECTORY / "notebooks"]),
+        ("{{ cookiecutter.include_docker }}", [PROJECT_DIRECTORY / "Dockerfile"]),
+        (
+            "{{ cookiecutter.include_docs_folder }}",
+            [
+                PROJECT_DIRECTORY / "docs",
+                PROJECT_DIRECTORY / "mkdocs.yml",
+                PROJECT_DIRECTORY / "CHANGELOG.md",
+                PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
+            ],
+        ),
+    ]
 
-    for condition, paths in removal_map.items():
+    for condition, paths in conditions_and_paths:
         if condition != "y":
             for path in paths:
-                check_and_remove_path(path)
+                if path.exists():
+                    if path.is_dir():
+                        remove_folder(path)
+                    elif path.is_file():
+                        remove_file(path)
 
 
 def print_futher_instuctions(project_slug: str, github: str) -> None:
