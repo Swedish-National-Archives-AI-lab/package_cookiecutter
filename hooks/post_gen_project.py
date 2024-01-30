@@ -28,8 +28,8 @@ def recursive_removal() -> None:
     removal_conditions = {
         "include_data_folder": [PROJECT_DIRECTORY / "data"],
         "include_model_folder": [PROJECT_DIRECTORY / "model"],
-        "include_docker": [PROJECT_DIRECTORY / "Dockerfile"],
         "include_notebook_folder": [PROJECT_DIRECTORY / "notebooks"],
+        "include_docker": [PROJECT_DIRECTORY / "Dockerfile"],
         "include_docs_folder": [
             PROJECT_DIRECTORY / "docs",
             PROJECT_DIRECTORY / "mkdocs.yml",
@@ -41,10 +41,13 @@ def recursive_removal() -> None:
     for condition, paths in removal_conditions.items():
         if "cookiecutter." + condition != "y":
             for path in paths:
+                print("cookiecutter." + condition, path)
                 if path.is_dir():
-                    remove_folder(path)
+                    print("file")
+                    # remove_folder(path)
                 elif path.is_file():
-                    remove_file(path)
+                    print("file")
+                    # remove_file(path)
 
 
 def print_futher_instuctions(project_slug: str, github: str) -> None:
@@ -96,7 +99,7 @@ def running_pre_installation() -> None:
     # (shell command , msg )
     commands = [
         (["pip", "install", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
-        # (['pre-commit', 'install'], "installing pre-commit hooks"),
+        (["pre-commit", "install"], "installing pre-commit hooks"),
         (
             ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
             "configuring poetry for local virtual environments",
@@ -112,10 +115,10 @@ def main() -> None:
     print("First removing unwanted folders and files..")
     recursive_removal()
 
-    print("Installing stuff..")
-    running_pre_installation()
+    # print("Installing stuff..")
+    # running_pre_installation()
 
-    print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
+    # print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
 
 if __name__ == "__main__":
