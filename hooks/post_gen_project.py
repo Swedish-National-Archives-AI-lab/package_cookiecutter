@@ -102,7 +102,6 @@ def running_pre_installation() -> None:
     # (shell command , msg )
     commands = [
         (["pip", "install", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
-        (["pre-commit", "install"], "installing pre-commit hooks"),
         (
             ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
             "configuring poetry for local virtual environments",
@@ -118,10 +117,10 @@ def main() -> None:
     print("First removing unwanted folders and files..")
     recursive_removal()
 
-    # print("Installing stuff..")
-    # running_pre_installation()
+    print("Installing stuff..")
+    running_pre_installation()
 
-    # print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
+    print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
 
 if __name__ == "__main__":
