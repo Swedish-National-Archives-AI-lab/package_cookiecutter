@@ -52,22 +52,38 @@ def remove_file(file_path: Path) -> None:
 
 def recursive_removal() -> None:
     if "{{ cookiecutter.include_data_folder }}" != "y":
-        remove_folder(PROJECT_DIRECTORY / "data")
+        data_folder = PROJECT_DIRECTORY / "data"
+        if data_folder.exists():
+            remove_folder(data_folder)
 
     if "{{ cookiecutter.include_model_folder }}" != "y":
-        remove_folder(PROJECT_DIRECTORY / "model")
+        model_folder = PROJECT_DIRECTORY / "model"
+        if model_folder.exists():
+            remove_folder(model_folder)
 
     if "{{ cookiecutter.include_notebook_folder }}" != "y":
-        remove_folder(PROJECT_DIRECTORY / "notebooks")
+        notebook_folder = PROJECT_DIRECTORY / "notebooks"
+        if notebook_folder.exists():
+            remove_folder(notebook_folder)
 
     if "{{ cookiecutter.include_docker }}" != "y":
-        remove_file(PROJECT_DIRECTORY / "Dockerfile")
+        docker_file = PROJECT_DIRECTORY / "Dockerfile"
+        if docker_file.exists():
+            remove_file(docker_file)
 
     if "{{ cookiecutter.include_docs_folder }}" != "y":
-        remove_folder(PROJECT_DIRECTORY / "docs")
-        remove_file(PROJECT_DIRECTORY / "mkdocs.yml")
-        remove_file(PROJECT_DIRECTORY / "CHANGELOG.md")
-        remove_folder(PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml")
+        docs_folder = PROJECT_DIRECTORY / "docs"
+        if docs_folder.exists():
+            remove_folder(docs_folder)
+        mkdocs_file = PROJECT_DIRECTORY / "mkdocs.yml"
+        if mkdocs_file.exists():
+            remove_file(mkdocs_file)
+        changelog_file = PROJECT_DIRECTORY / "CHANGELOG.md"
+        if changelog_file.exists():
+            remove_file(changelog_file)
+        mkdocs_workflow = PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml"
+        if mkdocs_workflow.exists():
+            remove_folder(mkdocs_workflow)
 
 
 def print_futher_instuctions(project_slug: str, github: str) -> None:
