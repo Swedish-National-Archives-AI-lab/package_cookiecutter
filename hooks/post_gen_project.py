@@ -26,28 +26,48 @@ def remove_file(file_path: Path) -> None:
         file_path.unlink()
 
 
-def recursive_removal() -> None:
-    removal_conditions = {
-        "{{ cookiecutter.include_data_folder }}": [PROJECT_DIRECTORY / "data"],
-        "{{ cookiecutter.include_model_folder }}": [PROJECT_DIRECTORY / "model"],
-        "{{ cookiecutter.include_notebook_folder }}": [PROJECT_DIRECTORY / "notebooks"],
-        "{{ cookiecutter.include_docker }}": [PROJECT_DIRECTORY / "Dockerfile"],
-        "{{ cookiecutter.include_docs_folder }}": [
-            PROJECT_DIRECTORY / "docs",
-            PROJECT_DIRECTORY / "mkdocs.yml",
-            PROJECT_DIRECTORY / "CHANGELOG.md",
-            PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
-        ],
-    }
+# def recursive_removal() -> None:
+#     removal_conditions = {
+#         "{{ cookiecutter.include_data_folder }}": [PROJECT_DIRECTORY / "data"],
+#         "{{ cookiecutter.include_model_folder }}": [PROJECT_DIRECTORY / "model"],
+#         "{{ cookiecutter.include_notebook_folder }}": [PROJECT_DIRECTORY / "notebooks"],
+#         "{{ cookiecutter.include_docker }}": [PROJECT_DIRECTORY / "Dockerfile"],
+#         "{{ cookiecutter.include_docs_folder }}": [
+#             PROJECT_DIRECTORY / "docs",
+#             PROJECT_DIRECTORY / "mkdocs.yml",
+#             PROJECT_DIRECTORY / "CHANGELOG.md",
+#             PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
+#         ],
+#     }
 
-    for condition, paths in removal_conditions.items():
-        if condition != "y":
-            for path in paths:
-                print(f"Removing: {path}")
-                if path.is_dir():
-                    remove_folder(path)
-                elif path.is_file():
-                    remove_file(path)
+#     for condition, paths in removal_conditions.items():
+#         if condition != "y":
+#             for path in paths:
+#                 print(f"Removing: {path}")
+#                 if path.is_dir():
+#                     remove_folder(path)
+#                 elif path.is_file():
+#                     remove_file(path)
+
+
+def recursive_removal() -> None:
+    if "{{ cookiecutter.include_data_folder }}" != "y":
+        remove_folder(PROJECT_DIRECTORY / "data")
+
+    if "{{ cookiecutter.include_model_folder }}" != "y":
+        remove_folder(PROJECT_DIRECTORY / "model")
+
+    if "{{ cookiecutter.include_notebook_folder }}" != "y":
+        remove_folder(PROJECT_DIRECTORY / "notebooks")
+
+    if "{{ cookiecutter.include_docker }}" != "y":
+        remove_file(PROJECT_DIRECTORY / "Dockerfile")
+
+    if "{{ cookiecutter.include_docs_folder }}" != "y":
+        remove_folder(PROJECT_DIRECTORY / "docs")
+        remove_file(PROJECT_DIRECTORY / "mkdocs.yml")
+        remove_file(PROJECT_DIRECTORY / "CHANGELOG.md")
+        remove_folder(PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml")
 
 
 def print_futher_instuctions(project_slug: str, github: str) -> None:
