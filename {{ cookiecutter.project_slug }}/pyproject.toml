@@ -49,6 +49,8 @@ mkdocs-material = "*"
 mkdocstrings = {version = ">=0.20", extras = ["python"]}
 pymdown-extensions = "*"
 
+{%- else -%}
+
 {% endif %}
 
 [build-system]
