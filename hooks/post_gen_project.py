@@ -1,4 +1,5 @@
 import subprocess
+import time
 from pathlib import Path
 
 from rich.console import Console
@@ -94,7 +95,7 @@ def running_pre_installation(console: Console) -> None:
     commands = [
         (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
         (
-            ["poetry", "config", "--local", "virtualenvs.in-project", "true", "--quiet"],
+            ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
             "configuring poetry for local virtual environments",
         ),
         (["poetry", "install", "--quiet"], "installing project dependencies with poetry"),
@@ -108,6 +109,7 @@ def main() -> None:
     console = Console()
 
     with console.status("First removing unwanted folders and files..", spinner="dots"):
+        time.sleep(0.5)
         recursive_removal(console)
 
     with console.status("Installing stuff..", spinner="dots"):
