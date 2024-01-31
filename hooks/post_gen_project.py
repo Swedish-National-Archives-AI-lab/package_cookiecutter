@@ -112,8 +112,8 @@ def main() -> None:
         time.sleep(0.5)
         recursive_removal(console)
 
-    with console.status("Installing stuff..", spinner="dots"):
-        running_pre_installation(console)
+    # with console.status("Installing stuff..", spinner="dots"):
+    #     running_pre_installation(console)
 
     print_futher_instuctions(console, project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
