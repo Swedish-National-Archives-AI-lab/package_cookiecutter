@@ -28,6 +28,13 @@ def remove_file(file_path: Path) -> None:
         file_path.unlink()
 
 
+def is_docker_installed() -> bool:
+    try:
+        subprocess.run(["docker", "--version"], capture_output=True, check=True)
+    except Exception:
+        return print("Warning: Docker is not installed.")
+
+
 def recursive_removal(console: Console) -> None:
     conditions_and_paths = [
         ("{{ cookiecutter.include_data_folder }}", [PROJECT_DIRECTORY / "data"]),
@@ -44,6 +51,9 @@ def recursive_removal(console: Console) -> None:
             ],
         ),
     ]
+
+    if "{{ cookiecutter.include_data_folder }}" == True:
+        is_docker_installed()
 
     for condition, paths in conditions_and_paths:
         if condition == "False":
@@ -79,6 +89,8 @@ def print_futher_instuctions(console: Console, project_slug: str, github: str) -
     table.add_column("Commands", style="blue")
 
     table.add_row("GitHub", github_message)
+    table.add_row("Configuring poetry for venv", "    $ poetry config --local virtualenvs.in-project true")
+    table.add_row("Installing project dependencies with poetry", "    $ poetry install --quiet")
     table.add_row("Activate venv", "    $ poetry shell")
 
     console.print(table)
@@ -91,15 +103,7 @@ def run_command(command: list[str], description: str, console: Console) -> None:
 
 
 def running_pre_installation(console: Console, project_slug: str) -> None:
-    commands = [
-        (["ls"], f"cd into {project_slug}"),
-        (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry"),
-        (
-            ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
-            "Configuring poetry for local virtual environments",
-        ),
-        (["poetry", "install", "--quiet"], "Installing project dependencies with poetry"),
-    ]
+    commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
 
     for command, description in commands:
         run_command(command, description, console)
