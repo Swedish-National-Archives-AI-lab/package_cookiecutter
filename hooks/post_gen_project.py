@@ -14,19 +14,17 @@ GITHUB_USER = "{{ cookiecutter.github_username }}"
 PROJECT_DIRECTORY = Path.cwd().absolute()
 
 
-def remove_folder(folder_path: Path, console: Console) -> None:
+def remove_folder(folder_path: Path) -> None:
     for child in folder_path.iterdir():
-        console.print(Text(f"Removing folder:{child}", "blue"))
         if child.is_file():
             child.unlink()
         else:
-            remove_folder(child, console)
+            remove_folder(child)
     folder_path.rmdir()
 
 
-def remove_file(file_path: Path, console: Console) -> None:
+def remove_file(file_path: Path) -> None:
     if file_path.exists():
-        console.print(Text(f"Removing folder:{file_path}", "blue"))
         file_path.unlink()
 
 
@@ -52,9 +50,11 @@ def recursive_removal(console: Console) -> None:
             for path in paths:
                 if path.exists():
                     if path.is_dir():
-                        remove_folder(path, console)
+                        console.print(Text(f"Removing folder:{path}", "blue"))
+                        remove_folder(path)
                     elif path.is_file():
-                        remove_file(path, console)
+                        console.print(Text(f"Removing folder:{path}", "blue"))
+                        remove_file(path)
 
 
 def print_futher_instuctions(console: Console, project_slug: str, github: str) -> None:
