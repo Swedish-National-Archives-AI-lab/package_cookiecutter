@@ -104,13 +104,13 @@ class PostGenProject:
             self.run_command(command, description)
 
     def setup(self):
+        self.console.print(Text(""))
+
         with self.console.status("First removing unwanted folders and files..", spinner="dots"):
-            time.sleep(0.5)
-            self.console.print(Text(""))
+            time.sleep(0.3)
             self.recursive_removal()
 
         with self.console.status("Installing stuff..", spinner="dots"):
-            self.console.print(Text(""))
             self.running_pre_installation()
 
         self.print_further_instructions()
