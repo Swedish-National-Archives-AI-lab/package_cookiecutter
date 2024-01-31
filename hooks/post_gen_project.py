@@ -85,19 +85,20 @@ def print_futher_instuctions(console: Console, project_slug: str, github: str) -
 
 
 def run_command(command: list[str], description: str, console: Console) -> None:
-    text_command = Text(f"Running '{' '.join(command)}'", "blue")
+    text_command = Text(description, "blue")
     console.print(text_command)
     subprocess.run(command, check=True)
 
 
-def running_pre_installation(console: Console) -> None:
+def running_pre_installation(console: Console, project_slug: str) -> None:
     commands = [
-        (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
+        (["cd", project_slug], f"cd into {project_slug}"),
+        (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry"),
         (
             ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
-            "configuring poetry for local virtual environments",
+            "Configuring poetry for local virtual environments",
         ),
-        (["poetry", "install", "--quiet"], "installing project dependencies with poetry"),
+        (["poetry", "install", "--quiet"], "Installing project dependencies with poetry"),
     ]
 
     for command, description in commands:
@@ -112,8 +113,8 @@ def main() -> None:
         time.sleep(0.5)
         recursive_removal(console)
 
-    # with console.status("Installing stuff..", spinner="dots"):
-    #     running_pre_installation(console)
+    with console.status("Installing stuff..", spinner="dots"):
+        running_pre_installation(console, project_slug=PROJECT_SLUG)
 
     print_futher_instuctions(console, project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
