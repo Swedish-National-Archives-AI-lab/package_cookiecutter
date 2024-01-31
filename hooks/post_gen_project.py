@@ -107,6 +107,7 @@ def running_pre_installation(console: Console) -> None:
 
 def main() -> None:
     console = Console()
+    console.print(Text(""))
 
     with console.status("First removing unwanted folders and files..", spinner="dots"):
         time.sleep(0.5)
