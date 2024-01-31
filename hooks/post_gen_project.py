@@ -92,7 +92,7 @@ def run_command(command: list[str], description: str, console: Console) -> None:
 
 def running_pre_installation(console: Console, project_slug: str) -> None:
     commands = [
-        (["cd", project_slug], f"cd into {project_slug}"),
+        (["ls"], f"cd into {project_slug}"),
         (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry"),
         (
             ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
