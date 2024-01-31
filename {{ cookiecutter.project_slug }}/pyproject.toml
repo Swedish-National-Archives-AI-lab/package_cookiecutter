@@ -3,7 +3,7 @@ authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
 description = "{{ cookiecutter.project_short_description }}"
 license = "{{cookiecutter.license}}"
 name = "{{ cookiecutter.project_slug }}"
-readme = [".github/README.md", "LICENSE"]
+readme = ["README.md", "LICENSE"]
 version = "0.0.1"
 
 documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
@@ -102,3 +102,6 @@ select = ["C", "E", "F", "I", "W"]
 [tool.ruff.isort]
 known-first-party = ["{{cookiecutter.package_name}}"]
 lines-after-imports = 2
+
+[tool.cruft]
+skip = ["src", "tests"]

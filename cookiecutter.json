@@ -1,8 +1,8 @@
 {
-  "author_name": "Riksarkivet",
+  "author_name": "Swedish-National-Archives-AI-lab",
   "author_email": "gabriel.borg@riksarkivet.se",
-  "github_username": "Riksarkivet",
-  "project_name": "htrflow",
+  "github_username": "Swedish-National-Archives-AI-lab",
+  "project_name": "htrflow_cookie",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
   "package_name": "{{ cookiecutter.project_slug.replace('-', '_') }}",
   "project_short_description": "A short description of the project",
