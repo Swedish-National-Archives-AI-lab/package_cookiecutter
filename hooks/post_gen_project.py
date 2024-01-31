@@ -88,7 +88,7 @@ class PostGenProject:
         table.add_row(f"Move in to project: {self.project_slug}", f"  $ cd {self.project_slug}")
         table.add_row("Configuring poetry for venv", "  $ poetry config --local virtualenvs.in-project true")
         table.add_row("Installing project dependencies with poetry", "  $ poetry install --quiet")
-        table.add_row("Activate venv", "    $ poetry shell")
+        table.add_row("Activate venv", "  $ poetry shell")
 
         self.console.print(table)
 

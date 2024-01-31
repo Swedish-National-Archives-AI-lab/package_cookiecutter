@@ -1,10 +1,8 @@
+import pandas as pd
 from typing import TypeVar
 
-import pandas as pd
 
-DataFrame = TypeVar('pandas.core.frame.DataFrame')
-
-def aggregate_mean(df :DataFrame, column:str) -> dict:
+def aggregate_mean(df :pd.DataFrame, column:str) -> dict:
     """Computes and returns the mean value of a column
 
     Args:
@@ -18,4 +16,8 @@ def aggregate_mean(df :DataFrame, column:str) -> dict:
 
 
 if __name__ == "__main__":
+
+    df = pd.DataFrame([[0, 2, 7, 4, 8], [1, 7, 6, 3, 7], [1, 1, "None", 8, 9], [0, 2, 3, "None", 6], [0, 5, 1, 4, 9]], columns=[f"feature_{i}" if i != 0 else "class" for i in range(5)])
+    aggregate_mean()
+
     print("hello world")

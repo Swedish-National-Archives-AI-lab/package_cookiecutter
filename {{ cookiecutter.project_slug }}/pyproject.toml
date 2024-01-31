@@ -3,7 +3,7 @@ authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
 description = "{{ cookiecutter.project_short_description }}"
 license = "{{cookiecutter.license}}"
 name = "{{ cookiecutter.project_slug }}"
-readme = "README.md"
+readme = [".github/README.md", "LICENSE"]
 version = "0.0.1"
 
 documentation = "https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug }}"
@@ -41,6 +41,7 @@ rich = "*"
 ruff = "*"
 
 {%- if cookiecutter.include_docs_folder =="y" -%}
+
 [tool.poetry.group.docs.dependencies]
 mkdocs = "*"
 mkdocs-jupyter = "*"
