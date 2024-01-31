@@ -7,121 +7,114 @@ from rich.table import Table
 from rich.text import Text
 
 
-# Project root directory
-PROJECT_SLUG = "{{ cookiecutter.project_slug }}"
-GITHUB_USER = "{{ cookiecutter.github_username }}"
+class ProjectSetup:
+    def __init__(self, project_slug, github_user):
+        self.project_slug = project_slug
+        self.github_user = github_user
+        self.project_directory = Path.cwd().absolute()
+        self.console = Console()
 
-PROJECT_DIRECTORY = Path.cwd().absolute()
+    def remove_folder(self, folder_path: Path) -> None:
+        for child in folder_path.iterdir():
+            if child.is_file():
+                child.unlink()
+            else:
+                self.remove_folder(child)
+        folder_path.rmdir()
 
+    def remove_file(self, file_path: Path) -> None:
+        if file_path.exists():
+            file_path.unlink()
 
-def remove_folder(folder_path: Path) -> None:
-    for child in folder_path.iterdir():
-        if child.is_file():
-            child.unlink()
-        else:
-            remove_folder(child)
-    folder_path.rmdir()
+    def is_docker_installed(self) -> bool:
+        try:
+            subprocess.run(["docker", "--version"], capture_output=True, check=True)
+        except Exception:
+            self.console.print("Warning: Docker is not installed.")
 
+    def recursive_removal(self) -> None:
+        conditions_and_paths = [
+            ("{{ cookiecutter.include_data_folder }}", [self.project_directory / "data"]),
+            ("{{ cookiecutter.include_model_folder }}", [self.project_directory / "models"]),
+            ("{{ cookiecutter.include_notebook_folder }}", [self.project_directory / "notebooks"]),
+            ("{{ cookiecutter.include_docker }}", [self.project_directory / "Dockerfile"]),
+            (
+                "{{ cookiecutter.include_docs_folder }}",
+                [
+                    self.project_directory / "docs",
+                    self.project_directory / "mkdocs.yml",
+                    self.project_directory / "CHANGELOG.md",
+                    self.project_directory / ".github" / "workflows" / "mkdocs.yml",
+                ],
+            ),
+        ]
 
-def remove_file(file_path: Path) -> None:
-    if file_path.exists():
-        file_path.unlink()
+        if "{{ cookiecutter.include_docker }}" == "True":
+            self.is_docker_installed()
 
+        for condition, paths in conditions_and_paths:
+            if condition == "False":
+                for path in paths:
+                    if path.exists():
+                        if path.is_dir():
+                            self.console.print(Text(f"Removing folder: {path}", "blue"))
+                            self.remove_folder(path)
+                        elif path.is_file():
+                            self.console.print(Text(f"Removing file: {path}", "blue"))
+                            self.remove_file(path)
 
-def is_docker_installed() -> bool:
-    try:
-        subprocess.run(["docker", "--version"], capture_output=True, check=True)
-    except Exception:
-        return print("Warning: Docker is not installed.")
+    def print_further_instructions(self) -> None:
+        github_message = f"""   Upload initial code to GitHub:
+            $ git init
+            $ git add .
+            $ git commit -m ":tada: Initial commit"
+            $ git branch -M main
+            $ git remote add origin https://github.com/{self.github_user}/{self.project_slug}.git
+            $ git push -u origin main
 
+        or just run:
+            $ make connect_to_repo
+        """
 
-def recursive_removal(console: Console) -> None:
-    conditions_and_paths = [
-        ("{{ cookiecutter.include_data_folder }}", [PROJECT_DIRECTORY / "data"]),
-        ("{{ cookiecutter.include_model_folder }}", [PROJECT_DIRECTORY / "models"]),
-        ("{{ cookiecutter.include_notebook_folder }}", [PROJECT_DIRECTORY / "notebooks"]),
-        ("{{ cookiecutter.include_docker }}", [PROJECT_DIRECTORY / "Dockerfile"]),
-        (
-            "{{ cookiecutter.include_docs_folder }}",
-            [
-                PROJECT_DIRECTORY / "docs",
-                PROJECT_DIRECTORY / "mkdocs.yml",
-                PROJECT_DIRECTORY / "CHANGELOG.md",
-                PROJECT_DIRECTORY / ".github" / "workflows" / "mkdocs.yml",
-            ],
-        ),
-    ]
+        text_title = Text.assemble("\n", (f"Project: {self.project_slug} was successfully created", "bold blue"))
+        text_caption = Text.assemble(("Happy coding! :)", "bold blue"), "\n")
 
-    if "{{ cookiecutter.include_data_folder }}" == True:
-        is_docker_installed()
+        table = Table(title=text_title, caption=text_caption)
 
-    for condition, paths in conditions_and_paths:
-        if condition == "False":
-            for path in paths:
-                if path.exists():
-                    if path.is_dir():
-                        console.print(Text(f"Removing folder:{path}", "blue"))
-                        remove_folder(path)
-                    elif path.is_file():
-                        console.print(Text(f"Removing folder:{path}", "blue"))
-                        remove_file(path)
+        table.add_column("Task", style="green", no_wrap=True)
+        table.add_column("Commands", style="blue")
 
+        table.add_row("GitHub", github_message)
+        table.add_row("Configuring poetry for venv", "    $ poetry config --local virtualenvs.in-project true")
+        table.add_row("Installing project dependencies with poetry", "    $ poetry install --quiet")
+        table.add_row("Activate venv", "    $ poetry shell")
 
-def print_futher_instuctions(console: Console, project_slug: str, github: str) -> None:
-    github_message = f"""   Upload initial code to GitHub:
-        $ git init
-        $ git add .
-        $ git commit -m ":tada: Initial commit"
-        $ git branch -M main
-        $ git remote add origin https://github.com/{github}/{project_slug}.git
-        $ git push -u origin main
+        self.console.print(table)
 
-    or just run:
-        $ make connect_to_repo
-    """
+    def run_command(self, command: list[str], description: str) -> None:
+        text_command = Text(description, "blue")
+        self.console.print(text_command)
+        subprocess.run(command, check=True)
 
-    text_title = Text.assemble("\n", ("Project: {project_slug} was successfully created", "bold blue"))
-    text_caption = Text.assemble(("Happy coding! :)", "bold blue"), "\n")
+    def running_pre_installation(self) -> None:
+        commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
 
-    table = Table(title=text_title, caption=text_caption)
+        for command, description in commands:
+            self.run_command(command, description)
 
-    table.add_column("Task", style="green", no_wrap=True)
-    table.add_column("Commands", style="blue")
+    def setup(self):
+        with self.console.status("First removing unwanted folders and files..", spinner="dots"):
+            time.sleep(0.5)
+            self.recursive_removal()
 
-    table.add_row("GitHub", github_message)
-    table.add_row("Configuring poetry for venv", "    $ poetry config --local virtualenvs.in-project true")
-    table.add_row("Installing project dependencies with poetry", "    $ poetry install --quiet")
-    table.add_row("Activate venv", "    $ poetry shell")
+        with self.console.status("Installing stuff..", spinner="dots"):
+            self.running_pre_installation()
 
-    console.print(table)
-
-
-def run_command(command: list[str], description: str, console: Console) -> None:
-    text_command = Text(description, "blue")
-    console.print(text_command)
-    subprocess.run(command, check=True)
-
-
-def running_pre_installation(console: Console, project_slug: str) -> None:
-    commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
-
-    for command, description in commands:
-        run_command(command, description, console)
-
-
-def main() -> None:
-    console = Console()
-    console.print(Text(""))
-
-    with console.status("First removing unwanted folders and files..", spinner="dots"):
-        time.sleep(0.5)
-        recursive_removal(console)
-
-    with console.status("Installing stuff..", spinner="dots"):
-        running_pre_installation(console, project_slug=PROJECT_SLUG)
-
-    print_futher_instuctions(console, project_slug=PROJECT_SLUG, github=GITHUB_USER)
+        self.print_further_instructions()
 
 
 if __name__ == "__main__":
-    main()
+    project_slug = "{{ cookiecutter.project_slug }}"
+    github_user = "{{ cookiecutter.github_username }}"
+    setup = ProjectSetup(project_slug, github_user)
+    setup.setup()
