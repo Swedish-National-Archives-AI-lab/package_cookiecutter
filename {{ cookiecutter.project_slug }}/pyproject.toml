@@ -40,16 +40,13 @@ python-dotenv = "*"
 rich = "*"
 ruff = "*"
 
-{%- if cookiecutter.include_docs_folder -%}
-
+{%- if cookiecutter.include_docs_folder =="y" -%}
 [tool.poetry.group.docs.dependencies]
 mkdocs = "*"
 mkdocs-jupyter = "*"
 mkdocs-material = "*"
 mkdocstrings = {version = ">=0.20", extras = ["python"]}
 pymdown-extensions = "*"
-
-{%- else -%}
 
 {% endif %}
 
