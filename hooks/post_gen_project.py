@@ -45,8 +45,6 @@ def recursive_removal(console: Console) -> None:
         ),
     ]
 
-    print(conditions_and_paths)
-
     for condition, paths in conditions_and_paths:
         if condition == "False":
             for path in paths:
@@ -114,8 +112,8 @@ def main() -> None:
         time.sleep(0.5)
         recursive_removal(console)
 
-    # with console.status("Installing stuff..", spinner="dots"):
-    #     running_pre_installation(console)
+    with console.status("Installing stuff..", spinner="dots"):
+        running_pre_installation(console)
 
     print_futher_instuctions(console, project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
