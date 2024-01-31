@@ -45,8 +45,9 @@ def recursive_removal(console: Console) -> None:
         ),
     ]
 
+    print(conditions_and_paths)
+
     for condition, paths in conditions_and_paths:
-        print(condition)
         if condition is False:
             print("ran")
             for path in paths:
