@@ -16,7 +16,7 @@ PROJECT_DIRECTORY = Path.cwd().absolute()
 
 def remove_folder(folder_path: Path, console: Console) -> None:
     for child in folder_path.iterdir():
-        console.print(Text(f"Removing folder:{child}", "bold blue"))
+        console.print(Text(f"Removing folder:{child}", "blue"))
         if child.is_file():
             child.unlink()
         else:
@@ -26,7 +26,7 @@ def remove_folder(folder_path: Path, console: Console) -> None:
 
 def remove_file(file_path: Path, console: Console) -> None:
     if file_path.exists():
-        console.print(Text(f"Removing folder:{file_path}", "bold blue"))
+        console.print(Text(f"Removing folder:{file_path}", "blue"))
         file_path.unlink()
 
 
@@ -85,7 +85,7 @@ def print_futher_instuctions(console: Console, project_slug: str, github: str) -
 
 
 def run_command(command: list[str], description: str, console: Console) -> None:
-    text_command = Text(f"Running '{' '.join(command)}'", "bold blue")
+    text_command = Text(f"Running '{' '.join(command)}'", "blue")
     console.print(text_command)
     subprocess.run(command, check=True)
 

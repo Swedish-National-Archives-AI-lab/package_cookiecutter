@@ -128,7 +128,7 @@ pip install poetry
 Set Virtual Environment Configuration:
 
 ```bash
-poetry config--local virtualenvs.in-project true
+poetry config --local virtualenvs.in-project true
 ```
 
 **Step 3:** Install Dependencies
