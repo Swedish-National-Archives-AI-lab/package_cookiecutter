@@ -8,9 +8,9 @@
   "project_short_description": "A short description of the project",
   "license": ["MIT", "EUPL-1.2"],
   "python_interpreter": "3.10",
-  "include_data_folder": "y",
-  "include_model_folder": "y",
-  "include_notebook_folder": "y",
-  "include_docker": "y",
-  "include_docs_folder": "y"
+  "include_data_folder": true,
+  "include_model_folder": true,
+  "include_notebook_folder": true,
+  "include_docker": true,
+  "include_docs_folder": true
 }

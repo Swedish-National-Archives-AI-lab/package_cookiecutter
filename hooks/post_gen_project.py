@@ -46,7 +46,7 @@ def recursive_removal(console: Console) -> None:
     ]
 
     for condition, paths in conditions_and_paths:
-        if condition != "y":
+        if not condition:
             for path in paths:
                 if path.exists():
                     if path.is_dir():
@@ -91,7 +91,6 @@ def run_command(command: list[str], description: str, console: Console) -> None:
 
 
 def running_pre_installation(console: Console) -> None:
-    # (shell command , msg )
     commands = [
         (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
         (

@@ -7,7 +7,7 @@
 
 ---
 
-{%- if cookiecutter.include_docs_folder == "y" -%}
+{%- if cookiecutter.include_docs_folder -%}
 **Documentation**: [https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug}}](https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug}})
 {%- else -%}
 
