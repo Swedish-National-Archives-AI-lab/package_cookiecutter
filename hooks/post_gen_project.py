@@ -1,6 +1,9 @@
 import subprocess
-import textwrap
 from pathlib import Path
+
+from rich.console import Console
+from rich.table import Table
+from rich.text import Text
 
 
 # Project root directory
@@ -10,9 +13,9 @@ GITHUB_USER = "{{ cookiecutter.github_username }}"
 PROJECT_DIRECTORY = Path.cwd().absolute()
 
 
-def remove_folder(folder_path: Path) -> None:
+def remove_folder(folder_path: Path, console: Console) -> None:
     for child in folder_path.iterdir():
-        print(child)
+        console.print(Text(f"Removing folder:{child}", "bold blue"))
         if child.is_file():
             child.unlink()
         else:
@@ -20,13 +23,13 @@ def remove_folder(folder_path: Path) -> None:
     folder_path.rmdir()
 
 
-def remove_file(file_path: Path) -> None:
+def remove_file(file_path: Path, console: Console) -> None:
     if file_path.exists():
-        print(file_path)
+        console.print(Text(f"Removing folder:{file_path}", "bold blue"))
         file_path.unlink()
 
 
-def recursive_removal() -> None:
+def recursive_removal(console: Console) -> None:
     conditions_and_paths = [
         ("{{ cookiecutter.include_data_folder }}", [PROJECT_DIRECTORY / "data"]),
         ("{{ cookiecutter.include_model_folder }}", [PROJECT_DIRECTORY / "models"]),
@@ -48,25 +51,13 @@ def recursive_removal() -> None:
             for path in paths:
                 if path.exists():
                     if path.is_dir():
-                        remove_folder(path)
+                        remove_folder(path, console)
                     elif path.is_file():
-                        remove_file(path)
+                        remove_file(path, console)
 
 
-def print_futher_instuctions(project_slug: str, github: str) -> None:
-    """Show user what to do next after project creation.
-
-    Args:
-        project_slug: current project name
-        github: GitHub username
-    """
-    message = f"""
-    ################ Project successfully initialized ################
-
-    Your project {project_slug} was created.
-
-    1. Upload initial code to GitHub:
-
+def print_futher_instuctions(console: Console, project_slug: str, github: str) -> None:
+    github_message = f"""   Upload initial code to GitHub:
         $ git init
         $ git add .
         $ git commit -m ":tada: Initial commit"
@@ -75,52 +66,54 @@ def print_futher_instuctions(project_slug: str, github: str) -> None:
         $ git push -u origin main
 
     or just run:
-        make connect_to_repo
-
-    2.
-
-    To activate venv run:
-        $ poetry shell
-
-    This will activate the local virtual environment with poetry shell.
-
-    ############################################################
-
-    Happy Coding :)
-
-
+        $ make connect_to_repo
     """
-    print(textwrap.dedent(message))
+
+    text_title = Text.assemble("\n", ("Project: {project_slug} was successfully created", "bold blue"))
+    text_caption = Text.assemble(("Happy coding! :)", "bold blue"), "\n")
+
+    table = Table(title=text_title, caption=text_caption)
+
+    table.add_column("Task", style="green", no_wrap=True)
+    table.add_column("Commands", style="blue")
+
+    table.add_row("GitHub", github_message)
+    table.add_row("Activate venv", "    $ poetry shell")
+
+    console.print(table)
 
 
-def run_command(command: list[str], description: str) -> None:
-    print(f"Running '{' '.join(command)}'")
+def run_command(command: list[str], description: str, console: Console) -> None:
+    text_command = Text(f"Running '{' '.join(command)}'", "bold blue")
+    console.print(text_command)
     subprocess.run(command, check=True)
 
 
-def running_pre_installation() -> None:
+def running_pre_installation(console: Console) -> None:
     # (shell command , msg )
     commands = [
-        (["pip", "install", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
+        (["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "upgrading pip, installing poetry"),
         (
-            ["poetry", "config", "--local", "virtualenvs.in-project", "true"],
+            ["poetry", "config", "--local", "virtualenvs.in-project", "true", "--quiet"],
             "configuring poetry for local virtual environments",
         ),
-        (["poetry", "install"], "installing project dependencies with poetry"),
+        (["poetry", "install", "--quiet"], "installing project dependencies with poetry"),
     ]
 
     for command, description in commands:
-        run_command(command, description)
+        run_command(command, description, console)
 
 
 def main() -> None:
-    print("First removing unwanted folders and files..")
-    recursive_removal()
+    console = Console()
 
-    print("Installing stuff..")
-    running_pre_installation()
+    with console.status("First removing unwanted folders and files..", spinner="dots"):
+        recursive_removal(console)
 
-    print_futher_instuctions(project_slug=PROJECT_SLUG, github=GITHUB_USER)
+    with console.status("Installing stuff..", spinner="dots"):
+        running_pre_installation(console)
+
+    print_futher_instuctions(console, project_slug=PROJECT_SLUG, github=GITHUB_USER)
 
 
 if __name__ == "__main__":
