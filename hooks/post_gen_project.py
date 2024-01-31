@@ -7,7 +7,7 @@ from rich.table import Table
 from rich.text import Text
 
 
-class ProjectSetup:
+class PostGenProject:
     def __init__(self, project_slug, github_user):
         self.project_slug = project_slug
         self.github_user = github_user
@@ -85,9 +85,9 @@ class ProjectSetup:
         table.add_column("Commands", style="blue")
 
         table.add_row("GitHub", github_message)
-        table.add_row(f"cd in to project: {self.project_slug}", f"   $ cd {self.project_slug}")
-        table.add_row("Configuring poetry for venv", "    $ poetry config --local virtualenvs.in-project true")
-        table.add_row("Installing project dependencies with poetry", "    $ poetry install --quiet")
+        table.add_row(f"Move in to project: {self.project_slug}", f"  $ cd {self.project_slug}")
+        table.add_row("Configuring poetry for venv", "  $ poetry config --local virtualenvs.in-project true")
+        table.add_row("Installing project dependencies with poetry", "  $ poetry install --quiet")
         table.add_row("Activate venv", "    $ poetry shell")
 
         self.console.print(table)
@@ -106,9 +106,11 @@ class ProjectSetup:
     def setup(self):
         with self.console.status("First removing unwanted folders and files..", spinner="dots"):
             time.sleep(0.5)
+            self.console.print(Text(""))
             self.recursive_removal()
 
         with self.console.status("Installing stuff..", spinner="dots"):
+            self.console.print(Text(""))
             self.running_pre_installation()
 
         self.print_further_instructions()
@@ -117,5 +119,5 @@ class ProjectSetup:
 if __name__ == "__main__":
     project_slug = "{{ cookiecutter.project_slug }}"
     github_user = "{{ cookiecutter.github_username }}"
-    setup = ProjectSetup(project_slug, github_user)
+    setup = PostGenProject(project_slug, github_user)
     setup.setup()
