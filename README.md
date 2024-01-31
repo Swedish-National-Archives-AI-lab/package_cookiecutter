@@ -10,6 +10,8 @@ TLDR;
 python -m cruft create https://github.com/Swedish-National-Archives-AI-lab/package_cookiecutter
 ```
 
+---
+
 ## To get started
 
 Requirements to use the cookiecutter template:
@@ -19,6 +21,8 @@ Requirements to use the cookiecutter template:
 - cruft
 
 ## Usage
+
+---
 
 ### local-requirements
 
@@ -117,6 +121,8 @@ To get the updates from the boilerplate into your project use:
 python -m cruft update
 ```
 
+---
+
 # For development
 
 ## Enviroment
@@ -183,6 +189,8 @@ pre-commit install
 ```bash
 pre-commit run --all-files
 ```
+
+---
 
 ## Ruff
 

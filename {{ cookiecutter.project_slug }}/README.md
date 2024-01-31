@@ -7,10 +7,8 @@
 
 ---
 
-{%- if cookiecutter.include_docs_folder -%}
+{%- if cookiecutter.include_docs_folder =="y" -%}
 **Documentation**: [https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug}}](https://{{ cookiecutter.github_username }}.github.io/{{ cookiecutter.project_slug}})
-{%- else -%}
-
 {% endif %}
 **Source Code**: [https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}](https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }})
 
@@ -58,6 +56,8 @@ And if your inside the virtual environment run:
 pytest
 ```
 
+---
+
 ### Building the package
 
 For Poetry, the equivalent of `pip install -e` . (which is used to install a package in editable mode with pip) is to use the poetry install command in the root directory of the project.
@@ -65,6 +65,8 @@ For Poetry, the equivalent of `pip install -e` . (which is used to install a pac
 When you run `poetry install` in a project that is managed by Poetry, it installs the project's dependencies as well as the project itself in editable mode. This means that changes to the project's code will immediately affect the installed package without the need for reinstallation.
 
 > You can run poetry install whether you're inside the Poetry-created virtual environment (activated using poetry shell) or not. Poetry will handle the installation of the project in editable mode correctly in either case.
+
+---
 
 ### Publish the Package
 
