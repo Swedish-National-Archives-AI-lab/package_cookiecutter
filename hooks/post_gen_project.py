@@ -19,7 +19,7 @@ def remove_folder(folder_path: Path, console: Console) -> None:
         if child.is_file():
             child.unlink()
         else:
-            remove_folder(child)
+            remove_folder(child, console)
     folder_path.rmdir()
 
 
