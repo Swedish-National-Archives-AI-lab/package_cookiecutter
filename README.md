@@ -85,7 +85,9 @@ pyenv global [PYTHON_VERSION]
 
 To install python packages:
 
-`$ pip install cookiecutter cruft `
+```bash
+pip install cookiecutter cruft
+```
 
 ### Creating the boilerplate
 
@@ -111,8 +113,9 @@ python -m cruft create https://github.com/Swedish-National-Archives-AI-lab/packa
 
 To get the updates from the boilerplate into your project use:
 
-`$ python -m cruft update
-`
+```bash
+python -m cruft update
+```
 
 # For development
 
