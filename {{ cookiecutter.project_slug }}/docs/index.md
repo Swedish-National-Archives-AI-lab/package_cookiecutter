@@ -3,7 +3,7 @@ hide:
   - navigation
 ---
 
-<img src="images/riks.png" width="20%" height="20%" align="right" />
+<img src="assets/riks.png" width="20%" height="20%" align="right" />
 
 # {{ cookiecutter.project_name }}
 
@@ -14,16 +14,14 @@ hide:
 
 {{ cookiecutter.project_short_description }}
 
-## **Installation**
+## Installation
 
-Installation can be done using [pypi](https://pypi.org/project/riks_ds_utils/):
+Installation can be done using [pypi](https://pypi.org/project/{{ cookiecutter.package_name }}):
 
 ```sh
-pip install {{ cookiecutter.project_slug }}
+pip install {{ cookiecutter.package_name }}
 ```
 
-## **Usage**
+## Usage
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-
-## Installation

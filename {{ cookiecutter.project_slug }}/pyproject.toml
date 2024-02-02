@@ -40,20 +40,13 @@ python-dotenv = "*"
 rich = "*"
 ruff = "*"
 
-{%- if cookiecutter.include_docs_folder -%}
-
-{% endif %}
-
-{%- if cookiecutter.include_docs_folder -%}
-
+# bug. For know remove this if docs not needed
 [tool.poetry.group.docs.dependencies]
 mkdocs = "*"
 mkdocs-jupyter = "*"
 mkdocs-material = "*"
 mkdocstrings = {version = ">=0.20", extras = ["python"]}
 pymdown-extensions = "*"
-
-{% endif %}
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
