@@ -20,9 +20,8 @@ configure_startup: ## configure_startup - Configuring poetry for venv + Installi
 	pip install --quiet --upgrade pip poetry
 	poetry config --local virtualenvs.in-project true
 	poetry install --quiet
-	poetry shell
-
-	@echo Don't forget to push changes..
+	@echo To activate venv run: poetry shell
+	@echo Don't forget to push changes to git.
 
 
 magic: connect_to_repo configure_startup ## runs connect_to_repo & configure_startup
