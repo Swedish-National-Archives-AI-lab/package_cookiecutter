@@ -38,8 +38,8 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: https://raw.githubusercontent.com/Borg93/riks_ds_utils/main/docs/images/riks.png
-  logo: https://raw.githubusercontent.com/Borg93/riks_ds_utils/main/docs/images/riks.png
+  favicon: https://raw.githubusercontent.com/Swedish-National-Archives-AI-lab/package_cookiecutter/main/%7B%7B%20cookiecutter.project_slug%20%7D%7D/docs/assets/favicon.ico
+  logo: https://raw.githubusercontent.com/Swedish-National-Archives-AI-lab/package_cookiecutter/main/%7B%7B%20cookiecutter.project_slug%20%7D%7D/docs/assets/riks.png
   icon:
     logo: logo
 
@@ -116,4 +116,5 @@ markdown_extensions:
 nav:
   - Getting started: index.md
   - Refrence API: api.md
-  - Changelog: changelog.md
+  - Projects:
+      - Demos: "demo.ipynb"  
