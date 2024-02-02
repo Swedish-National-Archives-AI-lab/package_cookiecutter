@@ -62,5 +62,3 @@ local_clean_linux: ## local_clean_linux - Clean local folders for linux
 docker_build: ## docker_build - Build and run docker container
 	docker build -t ${PACKAGE} .
 	docker run ${PACKAGE}
-
-
