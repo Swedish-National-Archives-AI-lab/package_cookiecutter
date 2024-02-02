@@ -25,13 +25,6 @@ configure_startup: ## configure_startup - Configuring poetry for venv + Installi
 
 magic: connect_to_repo configure_startup ## runs connect_to_repo & configure_startup
 
-
-release: ## release - Release a new version
-	@echo git tag -a "vX.Y.Z" -m "Release X.Y.Z"
-	@echo git push origin vX.Y.Z
-	@echo change release vX.Y.Z in setup.py..
-
-
 pre_commit: ## pre_commit - Setup pre-commit hooks
 	pre-commit --version
 	pre-commit install
@@ -60,3 +53,8 @@ local_clean_linux: ## local_clean_linux - Clean local folders for linux
 docker_build: ## docker_build - Build and run docker container
 	docker build -t ${PACKAGE} .
 	docker run ${PACKAGE}
+
+patch: ## patch - how to bump version
+	@echo poetry version prerelease
+	@echo poetry version patch
+
