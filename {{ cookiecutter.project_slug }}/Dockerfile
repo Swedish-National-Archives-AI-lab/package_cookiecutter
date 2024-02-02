@@ -2,11 +2,13 @@ FROM python:{{cookiecutter.python_interpreter}}
 
 WORKDIR /usr/src/app
 
+RUN pip install poetry
+
 COPY . .
 
-RUN pip install -e .
+RUN poetry install
 
-CMD [ "python3", "./src/{{cookiecutter.package_name}}/main.py"]
+CMD [ "poetry", "run", "./src/{{cookiecutter.package_name}}/main.py"]
 
 # Commands:
 # Build a docker image:

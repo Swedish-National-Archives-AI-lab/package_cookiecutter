@@ -1,5 +1,4 @@
 import subprocess
-import time
 from pathlib import Path
 
 from rich.console import Console
@@ -26,11 +25,17 @@ class PostGenProject:
         if file_path.exists():
             file_path.unlink()
 
-    def is_docker_installed(self) -> bool:
+    def is_docker_installed(self) -> None:
         try:
             subprocess.run(["docker", "--version"], capture_output=True, check=True)
         except Exception:
             self.console.print("Warning: Docker is not installed.")
+
+    def is_pyenv_installed(self) -> None:
+        try:
+            subprocess.run(["pyenv ", "--version"], capture_output=True, check=True)
+        except Exception:
+            self.console.print("Warning: pyenv is not installed. Please use some python version manager.")
 
     def recursive_removal(self) -> None:
         conditions_and_paths = [
@@ -49,6 +54,8 @@ class PostGenProject:
             ),
         ]
 
+        self.is_pyenv_installed()
+
         if "{{ cookiecutter.include_docker }}" == "True":
             self.is_docker_installed()
 
@@ -64,18 +71,6 @@ class PostGenProject:
                             self.remove_file(path)
 
     def print_further_instructions(self) -> None:
-        github_message = f"""   Upload initial code to GitHub:
-            $ git init
-            $ git add .
-            $ git commit -m ":tada: Initial commit"
-            $ git branch -M main
-            $ git remote add origin https://github.com/{self.github_user}/{self.project_slug}.git
-            $ git push -u origin main
-
-        or just run:
-            $ make connect_to_repo
-        """
-
         text_title = Text.assemble("\n", (f"Project: {self.project_slug} was successfully created", "bold blue"))
         text_caption = Text.assemble(("Happy coding! :)", "bold blue"), "\n")
 
@@ -83,12 +78,11 @@ class PostGenProject:
 
         table.add_column("Task", style="green", no_wrap=True)
         table.add_column("Commands", style="blue")
-
-        table.add_row("GitHub", github_message)
-        table.add_row(f"Move in to project: {self.project_slug}", f"  $ cd {self.project_slug}")
-        table.add_row("Configuring poetry for venv", "  $ poetry config --local virtualenvs.in-project true")
-        table.add_row("Installing project dependencies with poetry", "  $ poetry install --quiet")
-        table.add_row("Activate venv", "  $ poetry shell")
+        table.add_row("GitHub", f"First create a repo that has '{self.project_slug}' as name on Github")
+        table.add_row("Connect to repo", "$ make connect_to_repo")
+        table.add_row(f"Move in to project: {self.project_slug}", f"$ cd {self.project_slug}")
+        table.add_row("Configuring project", "  $ make magic")
+        table.add_row("Use pre-commit", "$ make pre_commit")
 
         self.console.print(table)
 
@@ -97,21 +91,20 @@ class PostGenProject:
         self.console.print(text_command)
         subprocess.run(command, check=True)
 
-    def running_pre_installation(self) -> None:
-        commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
+    # def running_pre_installation(self) -> None:
+    #     commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
 
-        for command, description in commands:
-            self.run_command(command, description)
+    #     for command, description in commands:
+    #         self.run_command(command, description)
 
     def setup(self):
         self.console.print(Text(""))
 
         with self.console.status("First removing unwanted folders and files..", spinner="dots"):
-            time.sleep(0.3)
             self.recursive_removal()
 
-        with self.console.status("Installing stuff..", spinner="dots"):
-            self.running_pre_installation()
+        # with self.console.status("Installing stuff..", spinner="dots"):
+        #     self.running_pre_installation()
 
         self.print_further_instructions()
 

@@ -1,11 +1,7 @@
 include .env
 
-VENV = venv
-PYTHON = $(VENV)/Scripts/python
 REPO_URL = https://{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
 PACKAGE = {{cookiecutter.package_name}}
-PIP = $(VENV)/Scripts/pip
-ACTIVATE_ENV = . venv/bin/activate
 
 ## help - Display this help screen
 help:
@@ -20,6 +16,18 @@ connect_to_repo:
 	git remote add origin $(REPO_URL)
 	git push -u origin main
 
+## configure_startup - Configuring poetry for venv + Installing project dependencies with poetry + Activate venv
+configure_startup:
+	pip install --quiet --upgrade pip poetry
+	poetry config --local virtualenvs.in-project true
+	poetry install --quiet
+	poetry shell
+
+	@echo Don't forget to push changes..
+
+
+magic: connect_to_repo configure_startup
+
 ## release - Release a new version
 release:
 	@echo git tag -a "vX.Y.Z" -m "Release X.Y.Z"
@@ -28,7 +36,6 @@ release:
 
 ## pre_commit - Setup pre-commit hooks
 pre_commit:
-	$(PIP) install pre-commit
 	pre-commit --version
 	pre-commit install
 	pre-commit run
