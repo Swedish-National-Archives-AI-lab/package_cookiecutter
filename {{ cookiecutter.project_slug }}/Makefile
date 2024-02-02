@@ -1,6 +1,6 @@
 include .env
 
-REPO_URL = https://{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
+REPO_URL = https://github.com/{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
 PACKAGE = {{cookiecutter.package_name}}
 
 ## help - Display this help screen in a more structured format

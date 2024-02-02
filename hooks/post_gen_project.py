@@ -81,7 +81,7 @@ class PostGenProject:
         table.add_row("GitHub", f"First create a repo that has '{self.project_slug}' as name on Github")
         table.add_row("Connect to repo", "$ make connect_to_repo")
         table.add_row(f"Move in to project: {self.project_slug}", f"$ cd {self.project_slug}")
-        table.add_row("Configuring project", "  $ make magic")
+        table.add_row("Configuring project", "$ make magic")
         table.add_row("Use pre-commit", "$ make pre_commit")
 
         self.console.print(table)

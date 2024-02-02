@@ -2,10 +2,8 @@
 site_name: "{{cookiecutter.project_name}}"
 site_url: https://{{cookiecutter.github_username}}.github.io/{{ cookiecutter.project_slug }}
 site_author: "{{cookiecutter.author_name}}"
-site_description: >-
-  Work in progress ...
-repo_name: {{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
-repo_url: https://{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
+site_description: "{{ cookiecutter.project_short_description }}"
+repo_url: https://github.com/{{cookiecutter.github_username}}/{{ cookiecutter.project_slug }}
 
 # Copyright
 copyright: Copyright &copy; 2023 {{cookiecutter.github_username}}
@@ -60,8 +58,8 @@ plugins:
             filters:
               - "!^_" # exclude all members starting with _
 
-  # - mkdocs-jupyter:
-  #     include_source: True
+  - mkdocs-jupyter:
+      include_source: True
 
 extra:
   social:
