@@ -33,7 +33,7 @@ class PostGenProject:
 
     def is_pyenv_installed(self) -> None:
         try:
-            subprocess.run(["pyenv ", "--version"], capture_output=True, check=True)
+            subprocess.run(["pyenv", "--version"], capture_output=True, check=True)
         except Exception:
             self.console.print("Warning: pyenv is not installed. Please use some python version manager.")
 

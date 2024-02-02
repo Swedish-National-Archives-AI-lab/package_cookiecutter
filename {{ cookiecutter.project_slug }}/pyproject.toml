@@ -42,6 +42,10 @@ ruff = "*"
 
 {%- if cookiecutter.include_docs_folder -%}
 
+{% endif %}
+
+{%- if cookiecutter.include_docs_folder -%}
+
 [tool.poetry.group.docs.dependencies]
 mkdocs = "*"
 mkdocs-jupyter = "*"
