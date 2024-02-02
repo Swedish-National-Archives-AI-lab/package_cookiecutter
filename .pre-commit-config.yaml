@@ -5,6 +5,7 @@ repos:
       - id: check-yaml
         exclude: ^{{ cookiecutter.project_slug }}/
       - id: trailing-whitespace
+        exclude: ^{{ cookiecutter.project_slug }}/
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.14
