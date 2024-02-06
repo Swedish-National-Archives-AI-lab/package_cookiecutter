@@ -1,13 +1,6 @@
 name: Draft a release
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+on: workflow_dispatch
 
 {% raw %}
 jobs:
