@@ -1,7 +1,8 @@
 import pandas as pd
+from typing import Dict
 
 
-def aggregate_mean(df :pd.DataFrame, column:str) -> dict:
+def aggregate_mean(df :pd.DataFrame, column:str) -> Dict[str,float]:
     """Computes and returns the mean value of a column
 
     Args:
@@ -20,5 +21,5 @@ if __name__ == "__main__":
         columns=[f"feature_{i}" if i != 0 else "class" for i in range(5)],
     )
 
-    aggregate_mean(df)
-    print("hello world")
+    mean_dict = aggregate_mean(df)
+    print(mean_dict)
