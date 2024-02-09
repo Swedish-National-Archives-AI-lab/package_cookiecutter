@@ -1,6 +1,7 @@
 import subprocess
 from pathlib import Path
 
+import toml
 from rich.console import Console
 from rich.table import Table
 from rich.text import Text
@@ -13,25 +14,25 @@ class PostGenProject:
         self.project_directory = Path.cwd().absolute()
         self.console = Console()
 
-    def remove_folder(self, folder_path: Path) -> None:
+    def _remove_folder(self, folder_path: Path) -> None:
         for child in folder_path.iterdir():
             if child.is_file():
                 child.unlink()
             else:
-                self.remove_folder(child)
+                self._remove_folder(child)
         folder_path.rmdir()
 
-    def remove_file(self, file_path: Path) -> None:
+    def _remove_file(self, file_path: Path) -> None:
         if file_path.exists():
             file_path.unlink()
 
-    def is_docker_installed(self) -> None:
+    def _is_docker_installed(self) -> None:
         try:
             subprocess.run(["docker", "--version"], capture_output=True, check=True)
         except Exception:
             self.console.print("Warning: Docker is not installed.")
 
-    def is_pyenv_installed(self) -> None:
+    def _is_pyenv_installed(self) -> None:
         try:
             subprocess.run(["pyenv", "--version"], capture_output=True, check=True)
         except Exception:
@@ -49,15 +50,16 @@ class PostGenProject:
                     self.project_directory / "docs",
                     self.project_directory / "mkdocs.yml",
                     self.project_directory / "CHANGELOG.md",
-                    self.project_directory / ".github" / "workflows" / "mkdocs.yml",
+                    self.project_directory / ".github" / "workflows" / "draft.yml",
+                    self.project_directory / ".github" / "workflows" / "release.yml",
                 ],
             ),
         ]
 
-        self.is_pyenv_installed()
+        self._is_pyenv_installed()
 
         if "{{ cookiecutter.include_docker }}" == "True":
-            self.is_docker_installed()
+            self._is_docker_installed()
 
         for condition, paths in conditions_and_paths:
             if condition == "False":
@@ -65,10 +67,10 @@ class PostGenProject:
                     if path.exists():
                         if path.is_dir():
                             self.console.print(Text(f"Removing folder: {path}", "blue"))
-                            self.remove_folder(path)
+                            self._remove_folder(path)
                         elif path.is_file():
                             self.console.print(Text(f"Removing file: {path}", "blue"))
-                            self.remove_file(path)
+                            self._remove_file(path)
 
     def print_further_instructions(self) -> None:
         text_title = Text.assemble("\n", (f"Project: {self.project_slug} was successfully created", "bold blue"))
@@ -86,16 +88,30 @@ class PostGenProject:
 
         self.console.print(table)
 
-    def run_command(self, command: list[str], description: str) -> None:
+    def _run_command(self, command: list[str], description: str) -> None:
         text_command = Text(description, "blue")
         self.console.print(text_command)
         subprocess.run(command, check=True)
 
-    # def running_pre_installation(self) -> None:
-    #     commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
+    def running_pre_installation(self) -> None:
+        commands = [(["pip", "install", "--quiet", "--upgrade", "pip", "poetry"], "Upgrading pip, installing poetry")]
 
-    #     for command, description in commands:
-    #         self.run_command(command, description)
+        for command, description in commands:
+            self._run_command(command, description)
+
+    def modify_pyproject_docs():
+        pyproject_path = Path("pyproject.toml")
+        if not pyproject_path.exists():
+            print("pyproject.toml not found.")
+            return
+
+        pyproject_data = toml.load(pyproject_path)
+
+        if "{{ cookiecutter.include_docs_folder }}" == "false":
+            pyproject_data.pop("tool.poetry.group.docs.dependencies", None)
+
+        with pyproject_path.open("w") as pyproject_file:
+            toml.dump(pyproject_data, pyproject_file)
 
     def setup(self):
         self.console.print(Text(""))
@@ -103,8 +119,10 @@ class PostGenProject:
         with self.console.status("First removing unwanted folders and files..", spinner="dots"):
             self.recursive_removal()
 
-        # with self.console.status("Installing stuff..", spinner="dots"):
-        #     self.running_pre_installation()
+            # with self.console.status("Installing stuff..", spinner="dots"):
+            #     self.running_pre_installation()
+
+            self.modify_pyproject_docs()
 
         self.print_further_instructions()
 
