@@ -10,6 +10,7 @@ cookiecutter = "*"
 cruft = "*"
 python = "^3.10"
 rich = "*"
+pyaml="*"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.0"
