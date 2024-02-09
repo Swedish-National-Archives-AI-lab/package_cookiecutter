@@ -29,4 +29,4 @@ jobs:
         shell: bash
       - name: run test
         run: poetry run pytest
-        shell:bash
+        shell: bash
