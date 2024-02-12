@@ -99,7 +99,7 @@ class PostGenProject:
         for command, description in commands:
             self._run_command(command, description)
 
-    def modify_pyproject_docs():
+    def modify_pyproject_docs(self):
         pyproject_path = Path("pyproject.toml")
         if not pyproject_path.exists():
             print("pyproject.toml not found.")
