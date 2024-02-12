@@ -1,19 +1,54 @@
 from pathlib import Path
 
-import yaml
 from cookiecutter.main import cookiecutter
 
 
-TEMPLATE_DIR = str(Path(__file__).parent.parent)
-CONTEXT_FILE = Path(__file__).parent / "context.yaml"
-
-with open(CONTEXT_FILE) as file_handler:
-    content = yaml.safe_load(file_handler)
-
-EXAMPLE_CONTEXT = content["default_context"]
-PROJECT_NAME = EXAMPLE_CONTEXT["project_name"]
+TEMPLATE_DIRECTORY = str(Path(__file__).parent.parent)
 
 
-def test_generate_new_project(tmp_path):
-    path_to_new_project = cookiecutter(TEMPLATE_DIR, no_input=True, extra_context=EXAMPLE_CONTEXT, output_dir=tmp_path)
-    assert path_to_new_project == str(tmp_path / PROJECT_NAME)
+def paths(directory):
+    paths = list(Path(directory).glob("**/*"))
+    paths = [r.relative_to(directory) for r in paths]
+    return {str(f) for f in paths if str(f) != "."}
+
+
+def test_static_and_templates(tmpdir):
+    cookiecutter(
+        template=TEMPLATE_DIRECTORY,
+        output_dir=str(tmpdir),
+        no_input=True,
+        extra_context={
+            "author_name": "John Doe",
+            "author_email": "john.doe@mail.com",
+            "github_username": "johndoe",
+            "project_name": "example_project",
+            "project_short_description": "A short description of the project",
+            "license": "MIT",
+            "python_interpreter": "3.10",
+        },
+    )
+    generated_paths = paths(tmpdir)
+
+    expected_paths = [
+        "example_project",
+        "example_project/.github",
+        "example_project/src/example_project",
+        "example_project/tests",
+    ]
+    for expected_path in expected_paths:
+        assert expected_path in generated_paths, f"Expected path {expected_path} is missing."
+
+
+def test_removing_docs_from_template(tmpdir):
+    cookiecutter(
+        template=TEMPLATE_DIRECTORY,
+        output_dir=str(tmpdir),
+        no_input=True,
+        extra_context={"project_name": "example_project", "include_docs_folder": "false"},
+    )
+
+    generated_paths = paths(tmpdir)
+
+    expected_path = "example_project/docs"
+
+    assert expected_path not in generated_paths, "The docs directory should not be present."

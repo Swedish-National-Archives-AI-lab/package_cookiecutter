@@ -107,8 +107,8 @@ class PostGenProject:
 
         pyproject_data = toml.load(pyproject_path)
 
-        if "{{ cookiecutter.include_docs_folder }}" == "false":
-            pyproject_data.pop("tool.poetry.group.docs.dependencies", None)
+        if "{{ cookiecutter.include_docs_folder }}" != "True":
+            pyproject_data.get("tool", {}).get("poetry", {}).get("group", {}).pop("docs", {}).pop("dependencies", None)
 
         with pyproject_path.open("w") as pyproject_file:
             toml.dump(pyproject_data, pyproject_file)
