@@ -30,25 +30,15 @@ pre_commit: ## pre_commit - Setup pre-commit hooks
 	pre-commit install
 	pre-commit run
 
-local_clean_windows: ## local_clean_windows - Clean local folders for windows
-	if exist "dist" rmdir /S dist
-	if exist ".pytest_cache" rmdir /S .pytest_cache
-	if exist ".mypy_cache" rmdir /S .mypy_cache
-	if exist ".tox" rmdir /S .tox
-	if exist "src\${PACKAGE}.egg-info" rmdir /S src\${PACKAGE}.egg-info
-	if exist "src\${PACKAGE}\__pycache__" rmdir /S src\${PACKAGE}\__pycache__
-	if exist "tests\unit\__pycache__" rmdir /S tests\unit\__pycache__
-	if exist ".coverage" del .coverage
-
 local_clean_linux: ## local_clean_linux - Clean local folders for linux
-	rm -r dist
-	rm -r .pytest_cache
+	rm -r .ruff_cache
 	rm -r .mypy_cache
-	rm -r .tox
-	rm -r src/${PACKAGE}.egg-info
+	rm -r .pytest_cache
+	rm .coverage
 	rm -r src/${PACKAGE}/__pycache__
 	rm -r tests/unit/__pycache__
-	rm .coverage
+	rm -r dist
+	rm -r src/${PACKAGE}.egg-info
 
 docker_build: ## docker_build - Build and run docker container
 	docker build -t ${PACKAGE} .
