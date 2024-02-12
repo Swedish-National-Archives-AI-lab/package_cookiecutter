@@ -6,3 +6,4 @@ default_context:
     project_short_description: "A short description of the project"
     license: "MIT"
     python_interpreter: "3.10"
+    include_docs_folder: "false"
