@@ -19,6 +19,7 @@ Requirements to use the cookiecutter template:
 - pyenv
 - cookiecutter
 - cruft
+- toml
 
 ## Usage
 
