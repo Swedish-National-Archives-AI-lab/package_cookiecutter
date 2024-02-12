@@ -31,14 +31,14 @@ pre_commit: ## pre_commit - Setup pre-commit hooks
 	pre-commit run
 
 local_clean_linux: ## local_clean_linux - Clean local folders for linux
-	rm -r .ruff_cache
-	rm -r .mypy_cache
-	rm -r .pytest_cache
-	rm .coverage
-	rm -r src/${PACKAGE}/__pycache__
-	rm -r tests/unit/__pycache__
-	rm -r dist
-	rm -r src/${PACKAGE}.egg-info
+	rm -rf .ruff_cache
+	rm -rf .mypy_cache
+	rm -rf .pytest_cache
+	rm -f .coverage
+	rm -rf src/${PACKAGE}/__pycache__
+	rm -rf tests/unit/__pycache__
+	rm -rf dist
+	rm -rf src/${PACKAGE}.egg-info
 
 docker_build: ## docker_build - Build and run docker container
 	docker build -t ${PACKAGE} .
