@@ -1,6 +1,9 @@
 import pytest
-from {{cookiecutter.package_name}}.main import aggregate_mean
+from {{cookiecutter.package_name}}.main import add, subtract
 
-@pytest.mark.parametrize("column, expected", [("feature_1", {0: 3, 1: 4})])
-def test_aggregate_mean_feature_1(data, column, expected):
-    assert expected == aggregate_mean(data, column)
+def test_add() -> None:
+    assert add(1, 2) == 3
+
+
+def test_subtract() -> None:
+    assert subtract(2, 1) == 1

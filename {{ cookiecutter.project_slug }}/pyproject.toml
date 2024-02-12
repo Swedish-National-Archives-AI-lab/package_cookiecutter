@@ -22,7 +22,7 @@ classifiers = [
 packages = [{include = "{{ cookiecutter.package_name }}", from = "src"}]
 
 [tool.poetry.dependencies]
-pandas = "*"
+pandas = "2.2.0"
 python = ">={{ cookiecutter.python_interpreter }}, <4.0"
 
 [tool.poetry.group.test.dependencies]
@@ -88,11 +88,11 @@ warn_unreachable = true
 warn_unused_configs = true
 
 [tool.ruff]
-ignore = ["C901", "E501", "E741", "W605"]
 line-length = 119
-select = ["C", "E", "F", "I", "W"]
+lint.ignore = ["C901", "E501", "E741", "W605"]
+lint.select = ["C", "E", "F", "I", "W"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F401", "F403", "F811"]
 
 [tool.cruft]
