@@ -34,9 +34,7 @@ pytest = "*"
 pytest-cov = "*"
 pytest-github-actions-annotate-failures = "*"
 python-dotenv = "*"
-rich = "*"
 ruff = "*"
-toml = "*"
 
 {% if cookiecutter.include_docs_folder == "true" %}
 [tool.poetry.group.docs.dependencies]
