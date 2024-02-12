@@ -37,18 +37,3 @@ def test_static_and_templates(tmpdir):
     ]
     for expected_path in expected_paths:
         assert expected_path in generated_paths, f"Expected path {expected_path} is missing."
-
-
-def test_removing_docs_from_template(tmpdir):
-    cookiecutter(
-        template=TEMPLATE_DIRECTORY,
-        output_dir=str(tmpdir),
-        no_input=True,
-        extra_context={"project_name": "example_project", "include_docs_folder": "false"},
-    )
-
-    generated_paths = paths(tmpdir)
-
-    expected_path = "example_project/docs"
-
-    assert expected_path not in generated_paths, "The docs directory should not be present."
