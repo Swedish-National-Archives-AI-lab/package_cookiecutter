@@ -8,15 +8,15 @@ version = "1.0.0"
 [tool.poetry.dependencies]
 cookiecutter = "*"
 cruft = "*"
+pyaml = "*"
 python = "^3.10"
 rich = "*"
-pyaml="*"
+toml = "*"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.6.0"
 pytest = "*"
 ruff = "*"
-toml = "*"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
