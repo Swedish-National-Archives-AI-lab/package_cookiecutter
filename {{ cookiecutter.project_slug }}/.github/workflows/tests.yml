@@ -8,7 +8,6 @@ on:
     branches:
       - main
 
-{% raw %}
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,6 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["{{cookiecutter.python_interpreter}}"] #add more 3.* to test here
+{% raw %}
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/poetry
