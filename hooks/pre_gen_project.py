@@ -2,7 +2,6 @@ import re
 import subprocess
 import sys
 
-
 MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
 MODULE_NAME = "{{ cookiecutter.project_slug }}"
 REQUIRED_PYTHON_VERSION = "{{ cookiecutter.python_interpreter }}"
