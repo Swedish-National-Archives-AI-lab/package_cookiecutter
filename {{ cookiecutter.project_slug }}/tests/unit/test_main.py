@@ -1,5 +1,7 @@
 import pytest
+
 from {{cookiecutter.package_name}}.main import add, subtract, gpu_intensive_calculation
+
 
 def test_add() -> None:
     assert add(1, 2) == 3
