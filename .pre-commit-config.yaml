@@ -12,4 +12,7 @@ repos:
     hooks:
       - id: ruff
         exclude: ^{{ cookiecutter.project_slug }}/
+        args: [ --fix ]
+      - id: ruff-format
+        exclude: ^{{ cookiecutter.project_slug }}/
 
