@@ -22,7 +22,6 @@ classifiers = [
 packages = [{include = "{{ cookiecutter.package_name }}", from = "src"}]
 
 [tool.poetry.dependencies]
-pandas = "2.2.0"
 python = ">={{ cookiecutter.python_interpreter }}, <4.0"
 
 [tool.poetry.group.test.dependencies]
@@ -57,6 +56,7 @@ markers = [
   "slow: marks tests as slow (deselect with '-m \"not slow\"')",
   "gpu: marks tests as gpu (deselect with '-m \"not gpu\"')",
 ]
+
 pythonpath = "src"
 testpaths = ["tests/unit"]
 
@@ -89,11 +89,17 @@ warn_unused_configs = true
 
 [tool.ruff]
 line-length = 119
-lint.ignore = ["C901", "E501", "E741", "W605"]
-lint.select = ["C", "E", "F", "I", "W"]
+
+[tool.ruff.lint]
+ignore = ["C901", "E501", "E741", "W605"]
+select = ["C", "E", "F", "I", "W"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F401", "F403", "F811"]
+
+[tool.ruff.isort]
+known-first-party = ["{{cookiecutter.package_name}}"]
+lines-after-imports = 2
 
 [tool.cruft]
 skip = ["src", "tests"]
