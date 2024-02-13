@@ -2,7 +2,6 @@ from pathlib import Path
 
 from cookiecutter.main import cookiecutter
 
-
 TEMPLATE_DIRECTORY = str(Path(__file__).parent.parent)
 
 
