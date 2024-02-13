@@ -1,9 +1,14 @@
 name: GPU tests 
 
-on:
-  pull_request:
-    branches:
-      - main
+# Todo: 
+# 1.setup self-hosted runner..
+# # 2. set event on: 
+# pull_request:
+#     branches:
+#       - main
+
+on: workflow_dispatch
+
 
 {% raw %}
 jobs:
