@@ -48,3 +48,9 @@ patch: ## patch - how to bump version
 	@echo poetry version prerelease
 	@echo poetry version patch
 
+quality: ## quality - Check code quality
+    ruff check .
+	mypy . 
+
+
+
