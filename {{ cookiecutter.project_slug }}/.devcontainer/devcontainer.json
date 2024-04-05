@@ -27,7 +27,8 @@
 				"christian-kohler.path-intellisense",
 				"ms-azuretools.vscode-docker",
 				"Gruntfuggly.todo-tree",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+		    		"ms-vscode.makefile-tools"
 			]
             }
         }
