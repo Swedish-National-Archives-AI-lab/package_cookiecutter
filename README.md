@@ -63,6 +63,10 @@ After cloning it you need to enter the following commands to add pyenv to your $
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 ```
 
+** Step 3.5**
+
+Restart (repoen) terminal
+
 #### Using pyenv
 
 **Step 4.**
