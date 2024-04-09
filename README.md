@@ -68,6 +68,10 @@ echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 
 Restart (repoen) terminal
 
+```bash
+exec $SHELL
+```
+
 #### Using pyenv
 
 **Step 4.**
