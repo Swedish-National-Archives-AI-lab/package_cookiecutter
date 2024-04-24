@@ -46,6 +46,7 @@ libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl \
 git
 ```
+for ubuntu 22.04 you can follow this guide: https://ericsysmin.com/2024/01/11/how-to-install-pyenv-on-ubuntu-22-04/
 
 **Step 2.**
 To install pyenv you can clone it directly from the GitHub repository:
