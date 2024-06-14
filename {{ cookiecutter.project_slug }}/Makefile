@@ -40,17 +40,28 @@ local_clean_linux: ## local_clean_linux - Clean local folders for linux
 	rm -rf dist
 	rm -rf src/${PACKAGE}.egg-info
 
-docker_build: ## docker_build - Build and run docker container
-	docker build -t ${PACKAGE} .
-	docker run ${PACKAGE}
+docker_build: ## docker_build - Build container
+	docker build -t ${PACKAGE}:latest .
+
+docker_run: ## docker_run - Run docker interactive, with gpus and stop container on exit (ctrl-D)
+	docker run --gpus all -it --rm --name ${CONTAINER} ${PACKAGE}:latest
+	@echo Dont forget to prune unsed images -$  docker image prune
 
 patch: ## patch - how to bump version
 	@echo poetry version prerelease
 	@echo poetry version patch
 
 quality: ## quality - Check code quality
-    ruff check .
+	ruff check .
 	mypy . 
 
+gpu_monitor: ## gpu_monitor - check gpu usage (pip install gpustat and bash: gpustat --watch) or just use nvidia-smi or use nvtop
+	watch -n 0.1 nvidia-smi 
 
+publish_docs: ## publish_docs - Deploy docs manually and removes site folder locally
+	poetry run mkdocs gh-deploy --force
+	rm -rf site
 
+scp_help: ## scp_help - just echos how to scp
+	@echo file - scp /path/to/file username@a:/path/to/destination
+	@echo folder - scp -r /path/to/file username@a:/path/to/destination
